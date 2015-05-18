@@ -67,8 +67,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Jumuro.Security.Cryptography.1.0.0.0\lib\net451\Jumuro.Security.Cryptography.dll</HintPath>
     </Reference>
-    <Reference Include="Jumuro.WebApi.Extensions.ActionResults, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Jumuro.WebApi.Extensions.ActionResults">
       <HintPath>..\packages\Jumuro.WebApi.Extensions.ActionResults.1.0.0.0\lib\net451\Jumuro.WebApi.Extensions.ActionResults.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
