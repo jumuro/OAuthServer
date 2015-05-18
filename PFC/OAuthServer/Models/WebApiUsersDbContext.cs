@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using OAuthServer.Migrations;
+//using OAuthServer.Migrations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OAuthServer.Models
@@ -15,12 +15,12 @@ namespace OAuthServer.Models
     //    DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
     //}
 
-    public class WebApiUsersDbContext : IdentityDbContext<User>//, IWebApiUsersDbContext
+    public class OAuthServerDbContext : IdentityDbContext<User>//, IWebApiUsersDbContext
     {
-        public WebApiUsersDbContext()
+        public OAuthServerDbContext()
             : base("DefaultConnection")
         {
-            Database.SetInitializer<WebApiUsersDbContext>(new MigrateDatabaseToLatestVersion<WebApiUsersDbContext, Configuration>());
+           // Database.SetInitializer<OAuthServerDbContext>(new MigrateDatabaseToLatestVersion<OAuthServerDbContext, Configuration>());
         }
 
         public DbSet<Client> Clients { get; set; }

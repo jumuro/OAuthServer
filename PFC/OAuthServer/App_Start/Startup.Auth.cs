@@ -42,23 +42,23 @@ namespace OAuthServer
             // Token validation
             app.UseOAuthBearerAuthentication(OAuthBearerOptions);
 
-            //Configure Google External Login
-            googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "xxxxxx",
-                ClientSecret = "xxxxxx",
-                Provider = new GoogleAuthProvider()
-            };
-            app.UseGoogleAuthentication(googleAuthOptions);
+            ////Configure Google External Login
+            //googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "xxxxxx",
+            //    ClientSecret = "xxxxxx",
+            //    Provider = new GoogleAuthProvider()
+            //};
+            //app.UseGoogleAuthentication(googleAuthOptions);
 
-            //Configure Facebook External Login
-            facebookAuthOptions = new FacebookAuthenticationOptions()
-            {
-                AppId = "xxxxxx",
-                AppSecret = "xxxxxx",
-                Provider = new FacebookAuthProvider()
-            };
-            app.UseFacebookAuthentication(facebookAuthOptions);
+            ////Configure Facebook External Login
+            //facebookAuthOptions = new FacebookAuthenticationOptions()
+            //{
+            //    AppId = "xxxxxx",
+            //    AppSecret = "xxxxxx",
+            //    Provider = new FacebookAuthProvider()
+            //};
+            //app.UseFacebookAuthentication(facebookAuthOptions);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace OAuthServer.Services
         /// <summary>
         /// WebApiUsersDbContext object with the connection to database.
         /// </summary>
-        private readonly WebApiUsersDbContext _dbContext;
+        private readonly OAuthServerDbContext _dbContext;
 
         /// <summary>
         /// UserManager object.
@@ -63,7 +63,7 @@ namespace OAuthServer.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public UserService(WebApiUsersDbContext dbContext, ApplicationUserManager userManager, IClientService clientService, IRoleService roleService)
+        public UserService(OAuthServerDbContext dbContext, ApplicationUserManager userManager, IClientService clientService, IRoleService roleService)
         {
             _dbContext = dbContext;
             _userManager = userManager;

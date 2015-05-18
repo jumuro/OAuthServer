@@ -16,7 +16,7 @@ namespace OAuthServer.Services
         /// <summary>
         /// WebApiUsersDbContext object with the connection to database.
         /// </summary>
-        private readonly WebApiUsersDbContext _dbContext;
+        private readonly OAuthServerDbContext _dbContext;
 
         /// <summary>
         /// Tracks whether Dispose has been called. 
@@ -30,7 +30,7 @@ namespace OAuthServer.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public AuditService(WebApiUsersDbContext dbContext)
+        public AuditService(OAuthServerDbContext dbContext)
         {
             _dbContext = dbContext;
         }

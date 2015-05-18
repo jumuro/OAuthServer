@@ -9,7 +9,7 @@ namespace OAuthServer.Models
 {
     public class ApplicationUserManager : UserManager<User>
     {
-        public ApplicationUserManager(WebApiUsersDbContext dbContext)
+        public ApplicationUserManager(OAuthServerDbContext dbContext)
             : base(new UserStore<User>(dbContext))
         {
         }
