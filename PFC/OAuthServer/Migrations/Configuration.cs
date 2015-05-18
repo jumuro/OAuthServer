@@ -38,11 +38,11 @@ namespace AuthServer.Migrations
                     Active = true,
                     AllowedOrigin = "*",
                     ApplicationType = ApplicationTypes.Javascript,
-                    Description = "OAuthServer Admin App",
-                    ClientId = "ngOAuthServerAdminApp",
+                    Description = "OAuth Management App",
+                    ClientId = "ngOAuthManagementApp",
                     AccessTokenExpireTime = 10,
                     RefreshTokenLifeTime = 10080, // 1 week in minutes
-                    Secret = _hashProvider.GetSHA256Hash("ngoauthserveradminapp-clientid").ToBase64String()
+                    Secret = _hashProvider.GetSHA256Hash("ngoauthmanagementapp-clientid").ToBase64String()
                 };
 
             //var esaSignatureClient =
