@@ -1,0 +1,7 @@
+﻿{
+    "appConfig": 
+        {
+            "securityInfoApiUrl":  "http://localhost:60000/api/security/webfactoryinfo"
+        }
+    
+}

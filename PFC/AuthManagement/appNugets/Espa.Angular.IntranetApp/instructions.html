@@ -1,0 +1,50 @@
+﻿<!--ADD THE BELOW IMPORTS-->
+
+<!--Notification Channel-->
+<script src="./appNugets/Espa.Angular.NotificationChannel/bundle/notificationChannelBundle.1.0.0.6.js"></script>
+
+<!--HTTP Interceptor-->
+<script src="./appNugets/Espa.Angular.HttpInterceptor/blundle/httpInterceptorBundle.1.0.0.7.js"></script>
+
+<script src="./appNugets/Espa.Angular.Intranet/bundles/intranetBundle.1.0.0.1.js"></script>
+
+<!--Espa.Angular.IntegratedSecurity-->
+<script src="./appNugets/Espa.Angular.IntegratedSecurity/bundles/integratedSecurityBundle.1.0.1.4.js"></script>
+<script src="./appnugets/Espa.Angular.IntegratedSecurity/constants/appConfigConstants.js"></script>
+<script src="./app/constants/nugets/Espa.Angular.IntegratedSecurity/securityConstants.js"></script>
+<script src="./Scripts/moment.min.js"></script>
+
+<!--Espa.Angular.Spinner-->
+<script src="./appNugets/Espa.Angular.Spinner/bundle/spinnerBundle.1.0.0.2.js"></script>
+
+<!--Espa.Angular.Modal-->
+<script src="./appNugets/Espa.Angular.Modal/bundle/modalBundle.1.0.0.4.js"></script>
+
+<!--Error Handling-->
+<script src="./Scripts/stacktrace.js"></script>
+<script src="./appNugets/Espa.Angular.ErrorHandling/bundle/errorHandlingBundle.1.0.0.6.js"></script>
+
+<!--Toaster-->
+<script src="./Scripts/Toaster.js"></script>
+
+<script src="Scripts/angular-filter.js"></script>
+
+
+<!--ADD THIS TO THE BODY (MENU & SPINNER & TOASTER)-->
+<toaster-container toaster-options="{'time-out': 5000, 'body-output-type': 'trustedHtml',  'position-class': 'toast-bottom-right'}"></toaster-container>
+<div id="wrapper">
+    <div id="box">
+        <espa-menu></espa-menu>
+
+        <div ng-view class="container main">
+
+        </div>
+
+        <espa-spinner></espa-spinner>
+    </div>
+</div>
+
+
+<!--WITHIN THE MODULE DECLARATION ADD THE FOLLOWING DEPENDENCIES-->
+
+'espa.modal', 'espa.spinner', 'espa.intranet', 'espa.errorhandling'

@@ -1,0 +1,5 @@
+﻿{
+    "appConfig": {
+        "securityInfoApiUrl":  "http://tswccapi.clcworld.com.local/api/security/webfactoryinfo"
+    }
+}
