@@ -29,7 +29,7 @@ namespace OAuthServer.Services
         /// <summary>
         /// WebApiUsersDbContext object with the connection to database.
         /// </summary>
-        private readonly WebApiUsersDbContext _dbContext;
+        private readonly OAuthServerDbContext _dbContext;
 
         /// <summary>
         /// RoleManager object.
@@ -53,7 +53,7 @@ namespace OAuthServer.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public RoleService(WebApiUsersDbContext dbContext, ApplicationRoleManager roleManager, ApplicationUserManager userManager)
+        public RoleService(OAuthServerDbContext dbContext, ApplicationRoleManager roleManager, ApplicationUserManager userManager)
         {
             _dbContext = dbContext;
             _roleManager = roleManager;

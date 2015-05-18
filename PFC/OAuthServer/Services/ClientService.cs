@@ -30,7 +30,7 @@ namespace OAuthServer.Services
         /// <summary>
         /// WebApiUsersDbContext object with the connection to database.
         /// </summary>
-        private readonly WebApiUsersDbContext _dbContext;
+        private readonly OAuthServerDbContext _dbContext;
 
         /// <summary>
         /// Object for computing the hash.
@@ -49,7 +49,7 @@ namespace OAuthServer.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public ClientService(WebApiUsersDbContext dbContext, IHashProvider hashProvider)
+        public ClientService(OAuthServerDbContext dbContext, IHashProvider hashProvider)
         {
             _dbContext = dbContext;
             _hashProvider = hashProvider;

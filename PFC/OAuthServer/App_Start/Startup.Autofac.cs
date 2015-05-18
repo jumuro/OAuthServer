@@ -18,7 +18,7 @@ namespace OAuthServer
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<WebApiUsersDbContext>()
+            builder.RegisterType<OAuthServerDbContext>()
                 .InstancePerLifetimeScope();
 
             // Register all the repository Interfaces for the Services

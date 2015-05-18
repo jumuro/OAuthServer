@@ -33,7 +33,7 @@ namespace OAuthServer
             config.Filters.Add(new ApplicationAuthorizeAttribute());
             
             // Add the default exception logger
-            config.Services.Add(typeof(IExceptionLogger), new LogException());
+            ///config.Services.Add(typeof(IExceptionLogger), new LogException());
             config.Services.Replace(typeof(IExceptionHandler), new GeneralException());
 
             // Configure Json Media Type Formatter

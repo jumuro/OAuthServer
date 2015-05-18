@@ -9,7 +9,7 @@ namespace OAuthServer.Models
 {
     public class ApplicationRoleManager : RoleManager<IdentityRole>
     {
-        public ApplicationRoleManager(WebApiUsersDbContext dbContext)
+        public ApplicationRoleManager(OAuthServerDbContext dbContext)
             : base(new RoleStore<IdentityRole>(dbContext))
         {
         }
