@@ -1,0 +1,13 @@
+﻿<div class="modal-header dialog-header-error">
+    <button type="button" class="close" ng-click="cancel()">×</button>
+    <h4 class="modal-title text-danger">
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <span ng-bind="headerText" class="leftpad"></span>
+    </h4>
+</div>
+<div class="modal-body text-danger ng-binding">
+    <h4 ng-bind="message"></h4>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="cancel()">{{buttons.cancel}}</button>
+</div>

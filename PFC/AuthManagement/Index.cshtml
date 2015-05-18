@@ -1,0 +1,84 @@
+﻿@using System.Web.Optimization;
+@using System.Linq;
+@using System.Configuration;
+@using System.Collections;
+@using System.Collections.Specialized;
+@using Espa.Angular.Extensions;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @*@Styles.Render("~/Content/sitecss")*@
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @*@Scripts.Render("~/bundles/angular")*@
+    @*@Scripts.Render("~/bundles/angularapp")*@
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/scripts/linq.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/angularjs.min.js"></script>
+    <script src="~/app/angularapp.js"></script>
+
+    <!--ng-infinite-scroll-->
+    <script src="~/Scripts/ng-infinite-scroll.min.js"></script>
+
+    <!--Espa.Angular.WebApi-->
+    <script src="~/appNugets/Espa.Angular.WebApi/webapi.1.0.0.1.js"></script>
+    <script src="~/appNugets/Espa.Angular.WebApi/constants/appConfigConstants.js"></script>
+    <script src="~/app/constants/nugets/Espa.Angular.WebApi/webapiConstants.js"></script>
+    @*CRUD REST*@
+    <script src="~/appNugets/Espa.Angular.Services.CrudREST/bundle/crudResTBundle.1.0.0.4.min.js"></script>
+    @*Notification Channel*@
+    <script src="~/appNugets/Espa.Angular.NotificationChannel/bundle/notificationChannelBundle.1.0.0.6.min.js"></script>
+    @*Http Interceptor*@
+    <script src="~/appNugets/Espa.Angular.HttpInterceptor/blundle/httpInterceptorBundle.1.0.0.7.min.js"></script>
+    @*Public OAuth*@
+    <script src="~/appNugets/Espa.Angular.OAuth/bundles/oauthBundle.1.0.0.9.js"></script>
+    @*ESPA Spinner*@
+    <script src="~/appNugets/Espa.Angular.Spinner/bundle/spinnerBundle.1.0.0.5.js"></script>
+    @*ESPA Modal*@
+    <script src="~/appNugets/Espa.Angular.Modal/bundle/modalBundle.1.0.0.4.min.js"></script>
+    @*ESPA Grid*@
+    <script src="~/appNugets/Espa.Angular.Grid/bundle/gridBundle.1.0.0.8.js"></script>
+    @*ESPA Validations*@
+    <script src="~/appNugets/Espa.Angular.Directives.Validations/bundle/validationsDirective.1.0.0.7.min.js"></script>
+    <!--Espa.Angular.IntegratedSecurity-->
+    <script src="~/appNugets/Espa.Angular.IntegratedSecurity/bundles/integratedSecurityBundle.1.0.1.13.js"></script>
+    <script src="~/appnugets/Espa.Angular.IntegratedSecurity/constants/appConfigConstants.js"></script>
+    <script src="~/app/constants/nugets/Espa.Angular.IntegratedSecurity/securityConstants.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    @*ESPA Intranet Menu*@
+    <script src="~/appNugets/Espa.Angular.Intranet/bundles/intranetBundle.1.0.0.12.js"></script>
+    
+    <!--Error Handling-->
+    <script src="~/Scripts/stacktrace.js"></script>
+    <script src="~/appNugets/Espa.Angular.ErrorHandling/bundle/errorHandlingBundle.1.0.0.6.js"></script>
+    @*Toaster*@
+    <script src="~/scripts/toaster.min.js"></script>
+
+    <script src="~/scripts/angular-filter.js"></script>
+</head>
+<body ng-app="app" ng-controller="appCtrl">
+    <toaster-container toaster-options="{'time-out': 5000, 'body-output-type': 'trustedHtml',  'position-class': 'toast-bottom-right'}"></toaster-container>
+    <div id="wrapper">
+        <div id="box">
+            <espa-menu></espa-menu>
+
+            <div ng-view class="container main">
+
+            </div>
+
+            <espa-spinner></espa-spinner>
+        </div>
+    </div>
+</body>
+</html>

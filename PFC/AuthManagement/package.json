@@ -1,0 +1,24 @@
+{
+  "name": "AuthManagement",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "glob": "^4.2.1",
+    "grunt": "^0.4.5",
+    "grunt-cache-bust": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-dotnet-assembly-info": "^1.0.18",
+    "grunt-exec": "^0.4.6",
+    "grunt-filerev": "^2.1.2",
+    "grunt-msbuild": "^0.2.2",
+    "grunt-replace": "^0.8.0",
+    "grunt-robocopy": "^1.0.6",
+    "grunt-usemin": "^3.0.0",
+    "grunt-version": "^0.3.0",
+    "load-grunt-config": "^0.16.0",
+    "load-grunt-tasks": "^1.0.0"
+  }
+}

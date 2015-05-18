@@ -1,0 +1,146 @@
+﻿@import "../../../Bootstrap.Themes.Default/content/components/custom-variables";
+
+/*HEADER*/
+/*ESTILOS PARA LA BARRA DEL HEADER*/
+
+#header {
+    box-shadow:0 0 2px @gray-dark;
+    z-index:1100;
+}
+.dropdown-menu {
+    margin-right:20px;
+    border:1px solid @dark-grey;
+}
+.user-dropdown li i {
+    color: #4ebae9;
+    padding-right: 5px;
+}
+.user-dropdown li:hover {
+    background: #28262c;
+    color: #ffffff;
+}
+.count-circle {
+    background: none repeat scroll 0 0 #85b200;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1em;
+    padding: 3px 5px;
+    position: absolute;
+    right: 12%;
+    top: -2%;
+    z-index: 400;
+    font-family:'Open Sans', sans-serif;
+}
+.count-circle-red {
+    background: none repeat scroll 0 0 #d96d00;
+}
+.count-circle-middle, .count-rounded-middle {
+    top: -8px;
+    right:-10px;
+}
+.count-rounded {
+    background: none repeat scroll 0 0 rgba(41, 200, 41, 0.9);
+    color: rgb(255, 255, 255);
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 1em;
+    padding: 3px 5px;
+    position: absolute;
+    right: 2%;
+    top: -2%;
+    z-index: 400;
+}
+.icon-user {
+    float: left;
+    font-size: 41px !important;
+}
+.alerts, .messages, .user, .refresh {
+    width: 60px !important;
+    height: 60px;
+    margin-right:10px;
+}
+.alerts:hover, .messages:hover, .user:hover {
+}
+.icon-alerts, .icon-messages, .icon-refresh-header {
+    border: 1px solid #ebebeb;
+    cursor: pointer;
+    font-size: 30px;
+    padding: 5px;
+    position: relative;
+    top: 15px;
+}
+.user {
+    width: 120px !important;
+    border-left: 1px solid @brand-primary;
+    margin-right: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.user a {
+    height:@navbar-height;
+    margin-top:-5% !important;
+}
+.user a img {
+    width:90%;
+    margin-top:10%;
+    display:block;
+    padding-left:60px !important;
+
+}
+.environment{
+    padding-top: 20px;
+    padding-right: 5px;
+    font-weight: bold;
+    height:60px;
+}
+.username {
+    color:@brand-primary;
+    width:30px;
+    text-transform:uppercase;
+    margin:0 auto;
+    line-height:@navbar-height;
+    position:absolute;
+    float:left;
+    font-size:12px;
+    top:0;
+    text-align:center;
+}
+.icon-refresh {
+    font-size:15px;
+}
+/*FIN DE ESTILOS PARA LA BARRA DEL HEADER*/
+
+.apptitle {
+    font-size: 30px;
+    text-align: left;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin:0;
+}
+.apptitle:before {
+    content: " ";
+    display: inline-block;
+    border: 0.4em solid transparent;
+    border-left-color: #4ebae9;
+    height: 0;
+    width: 1px;
+}
+
+
+.appSiteMap {
+    font-size: 10px;
+    text-align: left;
+    font-weight: 300;
+}

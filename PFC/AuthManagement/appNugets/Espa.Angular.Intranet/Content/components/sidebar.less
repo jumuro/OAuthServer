@@ -1,0 +1,279 @@
+﻿@import "../../../Bootstrap.Themes.Default/content/components/custom-variables";
+
+/*SIDEBAR*/
+/*CONTENEDOR MENU ABRIR Y CERRAR*/
+    #sidebar-wrapper {
+        height: 100%;
+        padding:0;
+        position: fixed;
+        z-index: 1070;
+        background:@brand-secondary;
+    }
+    #sidebar {
+        height:100%;
+        padding:0;
+        position:relative;
+    }
+    #wrapper.active #sidebar-wrapper {
+        left: 0;
+        width: @width-menu-closed;
+        z-index: 999;
+    }
+    #menuLg {
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        z-index: 100;
+        min-width: @width-menu-open !important;
+        height:100%;
+    }
+    #wrapper.active #sidebar-wrapper:hover {
+        width: @width-menu-open;
+    }
+    .active #sidebar-wrapper:hover .level0 span {
+        display:table-cell;
+    }
+    .icon-pin, .icon-unpin {
+    font-size:18px;
+    padding-right:25px;
+    color:@brand-primary;
+    opacity:.8;
+    }
+    .icon-unpin {
+        color:#ccc;
+        opacity:.5;
+    }
+/*FIN CONTENEDOR MENU ABRIR Y CERRAR*/
+
+.level0 i {
+  font-size: 30px;
+  opacity: .6;
+  color: #ffffff;
+  vertical-align: middle;
+  display: table-cell;
+  padding-left: 17px;
+}
+.level0 span {
+  opacity: .6;
+  color: #ffffff;
+  margin-left: 5px;
+  text-align: left;
+  font-size: 11px;
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 17px;
+  text-transform: uppercase;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.active .level0 span {
+    display:none;
+}
+/*FIN CONTENEDOR MENU ABIERTO*/
+
+.shortcuts-icons {
+  border-bottom: 1px dotted #666;
+  padding: 15px 0 10px 0 !important;
+  float:left;
+  width:100%;
+  cursor:pointer;
+}
+/*LEVEL 1*/
+.level0 > li {
+  display: table;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  position:static;
+}
+/* We apply the link style */
+.level0 > li > a {
+  text-decoration: none;
+  vertical-align: middle;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+.level0 li a:hover {
+  background:@brand-tertiary !important;
+}
+.level0 > li > a:hover i, .level0 > li a:hover span {
+  opacity: 1 !important;
+  color: #4ebae9 !important;
+}
+.level0 > li:hover:after {
+  content: " ";
+  display: inline-block;
+  border-bottom: 0.8em solid transparent;
+  border-left: 0.8em solid transparent;
+  border-right: 0.8em solid #4ebae9;
+  border-top: 0.8em solid transparent;
+  height: 0;
+  margin-top: -35px;
+  position: absolute;
+  left: 208px;
+  width: 1px;
+}
+
+/**** SECOND LEVEL MENU ****/
+/* We make the position to absolute for flyout menu and hidden the ul until the user hover the parent li item */
+.level1 {
+  position: absolute;
+  visibility: hidden;
+  display: inline-block;
+  height: 100% !important;
+  color: #ffffff;
+  left: 230px;
+  top:0;
+  z-index: 2;
+  width: 450px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.level1 li.items {
+  width: 98%;
+  font-size: 13px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  float: left;
+  text-align: left;
+  cursor: default;
+  margin: 1% !important;
+  background: rgba(255, 255, 255, 0.08);
+}
+.items a:not(.noflyout) {
+  background: url(../../../Bootstrap.Themes.Default/img/hasmenu.png) no-repeat center right;
+}
+.level1 li.items:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.grouptitle:hover {
+  background: none;
+  cursor: default;
+}
+.grouptitle {
+  width: 100%;
+  display: block;
+  text-align: left;
+  border-bottom: 1px dotted #ffffff;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  margin-top: 20px !important;
+  float: left;
+}
+.grouptitle i {
+  font-size: 20px;
+  margin-right: 5px;
+  display:inline-block;
+}
+/* We apply the link style */
+.level1 li a.noflyout {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0;
+}
+.level1 ul {
+    margin:0;
+    padding:0;
+}
+/* When user has hovered the li item, we show the ul list by applying display:block, note: 150px is the individual menu width.  */
+.displaySubMenu {
+    left: 230px;
+    display: inline-block;
+    visibility: visible;
+    width: 450px;
+    padding: 0 25px 25px 25px;
+    padding-right: 10px;
+    background-color: #4ebae9;
+}
+/* We apply the background hover color when user hover the mouse over of the li component */
+.level1 > li:hover {
+  background: rgba(255, 255, 255, 0.2);
+  /*position:relative;*/
+}
+/* We apply the link style */
+.level1 li > a {
+  color: #ffffff !important;
+  display: block;
+  text-decoration: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px !important;
+  text-transform: uppercase;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.level1 li.selected {
+  color: #ffffff;
+}
+.level1  > li > a:hover {
+  color: #ffffff;
+  padding-left: 20px !important;
+  background-position: 400px;
+  border-left: 5px solid #ffffff;
+}
+.level1 li > a.noflyout:hover:after {
+  border-right: 0.8em solid transparent;
+  -moz-transition: none;
+  -o-transition: none;
+  -webkit-transition: none;
+  transition: none;
+}
+/**** THIRD LEVEL MENU ****/
+/* We make the position to absolute for flyout menu and hidden the ul until the user hover the parent li item */
+.level2 {
+    position: absolute;
+    color: #333;
+    top: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    left: 425px;
+    display: inline-block;
+    width: 250px;
+    background: #71C8ED;
+    z-index: 100;
+    height: 100%;
+}
+.level2 li {
+  display: block !important;
+  text-align: left !important;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+
+
+/*CONTENIDO MAIN*/
+#box {
+    margin-top:@navbar-height;
+}
+.main {
+    margin-left: @width-menu-open;
+    padding: 20px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: calc(~"100% - " @width-menu-open) !important;
+    min-height: calc(~"100% - " @navbar-height) !important;
+    position:absolute;
+}
+#wrapper.active .main {
+    margin:0;
+    margin-left:@width-menu-closed;
+    
+    /* Standard */
+    width: calc(~"100% - " @width-menu-closed) !important;
+}
