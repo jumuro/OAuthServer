@@ -100,7 +100,7 @@ namespace OAuthServer.Controllers
 
             var insertedRole = await _roleService.InsertRoleAsync(roleViewModel);
 
-            return this.Created<RoleViewModel>(insertedRole, "Role created successfully.");
+            return this.Created<RoleViewModel>(Request.RequestUri, insertedRole, "Role created successfully.");
         }
 
         #endregion

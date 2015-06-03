@@ -68,7 +68,7 @@
       <HintPath>..\packages\Jumuro.Security.Cryptography.1.0.0.0\lib\net451\Jumuro.Security.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="Jumuro.WebApi.Extensions.ActionResults">
-      <HintPath>..\packages\Jumuro.WebApi.Extensions.ActionResults.1.0.0.0\lib\net451\Jumuro.WebApi.Extensions.ActionResults.dll</HintPath>
+      <HintPath>..\packages\Jumuro.WebApi.Extensions.ActionResults.1.0.0.1\lib\net451\Jumuro.WebApi.Extensions.ActionResults.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -143,7 +143,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -93,7 +93,7 @@ namespace OAuthServer.Controllers
 
             var insertedClient = await _clientService.InsertClientAsync(clientViewModel);
 
-            return this.Created<ClientViewModel>(insertedClient, "Client created successfully.");
+            return this.Created<ClientViewModel>(Request.RequestUri, insertedClient, "Client created successfully.");
         }
 
         #endregion
