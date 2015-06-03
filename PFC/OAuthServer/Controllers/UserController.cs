@@ -100,7 +100,7 @@ namespace OAuthServer.Controllers
 
             var insertedUser = await _userService.InsertUserAsync(registerViewModel);
 
-            return this.Created<UserViewModel>(insertedUser, "User created successfully.");
+            return this.Created<UserViewModel>(Request.RequestUri, insertedUser, "User created successfully.");
         }
 
         #endregion
@@ -123,7 +123,7 @@ namespace OAuthServer.Controllers
 
             var insertedUser = await _userService.InsertUserAsync(userViewModel);
 
-            return this.Created<UserViewModel>(insertedUser, "User created successfully.");
+            return this.Created<UserViewModel>(Request.RequestUri, insertedUser, "User created successfully.");
         }
 
         #endregion

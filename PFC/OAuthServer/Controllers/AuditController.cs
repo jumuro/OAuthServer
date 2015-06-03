@@ -46,7 +46,7 @@ namespace OAuthServer.Controllers
 
             var insertedAudit = await _auditService.InsertAuditAsync(auditRecord);
 
-            return this.Created<Audit>(insertedAudit, "Audit record created successfully.");
+            return this.Created<Audit>(Request.RequestUri, insertedAudit, "Audit record created successfully.");
         }
 
         #endregion

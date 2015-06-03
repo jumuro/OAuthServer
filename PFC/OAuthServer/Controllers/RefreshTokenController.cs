@@ -125,7 +125,7 @@ namespace OAuthServer.Controllers
 
             var insertedRefreshToken = await _refreshTokenService.InsertRefreshTokenAsync(refreshToken);
 
-            return this.Created<RefreshToken>(insertedRefreshToken, "Refresh token created successfully.");
+            return this.Created<RefreshToken>(Request.RequestUri, insertedRefreshToken, "Refresh token created successfully.");
         }
 
         #endregion
