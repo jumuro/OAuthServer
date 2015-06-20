@@ -1,23 +1,39 @@
 ﻿///#source 1 1 /app/app.js
-'use strict';
+(function () {
+    'use strict';
 
-// Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
-//'mgcrea.ngStrap'
-angular.module('app', ['ngRoute', 'ngLocale',
-                       'espa.crudRest', 'espa.publicOAuth', 'espa.spinner', 'espa.modal', 'espa.grid', 'espa.validations',
-                       'espa.intranet', 'espa.errorHandling', 'espa.webapi'])
-    .run(['$rootScope', function ($rootScope) {
-        $rootScope.title = "";
+    // Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
+    //'mgcrea.ngStrap'
+    angular.module('app', ['ngRoute', 'ngLocale',
+                           'espa.crudRest', 'espa.publicOAuth', 'espa.spinner', 'espa.modal', 'espa.grid', 'espa.validations',
+                           'espa.intranet', 'espa.errorHandling', 'espa.webapi']);
 
-        $rootScope.$on('$routeChangeError', function (event, current, previous, error) {
-            if (error.status === 404) {
-                $location.path('/home');
-            }
-        });
-    }])
-    .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+})();
+///#source 1 1 /app/app.config.js
+(function () {
+    'use strict';
+
+    angular.module('app')
+        .config(configure);
+
+    configure.$inject = ['$locationProvider', '$httpProvider'];
+
+    function configure($locationProvider, $httpProvider) {
         $httpProvider.interceptors.push('httpInterceptorService');
 
+        //$locationProvider.html5Mode(true);
+    }
+})();
+///#source 1 1 /app/app.config.route.js
+(function () {
+    'use strict';
+
+    angular.module('app')
+        .config(configureRoute);
+
+    configureRoute.$inject = ['$routeProvider'];
+
+    function configureRoute($routeProvider) {
         $routeProvider.
             when('/role', {
                 templateUrl: './app/views/role.html',
@@ -27,7 +43,8 @@ angular.module('app', ['ngRoute', 'ngLocale',
             }).
             when('/client', {
                 templateUrl: './app/views/client.html',
-                controller: 'clientCtrl',
+                controller: 'ClientCtrl',
+                controllerAs: 'vm',
                 menuTitle: 'Clients',
                 levelTree: [{ title: "Security", icon: "fa fa-lock" }, { title: "Auth Management", icon: "" }, { title: "Clients", icon: "" }]
             }).
@@ -43,181 +60,232 @@ angular.module('app', ['ngRoute', 'ngLocale',
                 menuTitle: 'Users',
                 levelTree: [{ title: "Security", icon: "fa fa-lock" }, { title: "Auth Management", icon: "" }, { title: "Users", icon: "" }]
             })
-        //    otherwise({ redirectTo: '/role' });
+            //otherwise({ redirectTo: '/role' });
+    }
+})();
+///#source 1 1 /app/app.run.js
+(function () {
+    'use strict';
 
-        //$locationProvider.html5Mode(true);
-    }]);
+    angular
+        .module('app')
+        .run(runBlock);
 
+    runBlock.$inject = ['$rootScope'];
 
+    function runBlock(rootScope) {
+        $rootScope.title = "";
+
+        $rootScope.$on('$routeChangeError', function (event, current, previous, error) {
+            if (error.status === 404) {
+                $location.path('/home');
+            }
+        });
+    }
+})();
 ///#source 1 1 /app/controllers/appController.js
-'use strict';
+(function () {
+    'use strict';
 
-// Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
-//'mgcrea.ngStrap'
-angular.module('app')
-    .controller('appCtrl', appCtrl);
+    // Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
+    //'mgcrea.ngStrap'
+    angular.module('app')
+        .controller('appCtrl', appCtrl);
 
-appCtrl.$inject = ['$scope', 'webapiConstants'];
+    appCtrl.$inject = ['$scope', 'webapiConstants'];
 
-function appCtrl($scope, webapiConstants) {
+    function appCtrl($scope, webapiConstants) {
 
-}
+    }
+})();
 ///#source 1 1 /app/controllers/clientController.js
-'use strict';
+(function() {
+    'use strict';
 
-angular.module('app')
-    .controller('clientCtrl', clientCtrl);
+    angular.module('app')
+        .controller('ClientCtrl', ClientCtrl);
 
-clientCtrl.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+    ClientCtrl.$inject = ['modalService', '$modal', 'toaster', 'clientFactory'];
 
-function clientCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
-    //#region Private Methods
+    function ClientCtrl(modalService, $modal, toaster, clientFactory) {
+        var vm = this;
 
-    //Set the clients grid configuration
-    var configureClientsGrid = function () {
-        var columnList = [
-            { name: 'clientId', header: 'Client Id', isFilter: false, isOrder: true },
-            { name: 'description', header: 'Description', isFilter: false, isOrder: true },
-            { name: 'applicationType.description', header: 'Application Type', isFilter: false, isOrder: true },
-            { name: 'accessTokenExpireTime', header: 'Access Token Expire Time', isFilter: false, isOrder: true },
-            { name: 'refreshTokenLifeTime', header: 'Refresh Token Life Time', isFilter: false, isOrder: true },
-            { name: 'allowedOrigin', header: 'Allowed Origin', isFilter: true, isOrder: true },
-            { name: 'isActive', header: 'Is Active', isFilter: true, isOrder: true }
-        ];
+        vm.applicationTypes = [];
+        vm.deleteClient = deleteClient;
+        vm.gridClientsOptions = {};
+        vm.openPopup = openPopup;
+        
 
-        $scope.gridClientsOptions = {
-            columnList: columnList,
-            noDataMessage: 'There are no clients',
-            animate: true,
-            crudOptions: {
-                enable: true,
-                insert: {
-                    security: {
-                        route: '/client',
-                        action: 'insert'
-                    },
-                    method: function () {
-                        $scope.openPopup(false, null);
-                    }
-                },
-                edit: {
-                    security: {
-                        route: '/client',
-                        action: 'edit'
-                    },
-                    method: function (data) {
-                        $scope.openPopup(true, data);
-                    }
-                },
-                delete: {
-                    security: {
-                        route: '/client',
-                        action: 'delete'
-                    },
-                    method: function (data) {
-                        $scope.deleteClient(data);
+
+
+
+
+
+        // IS THIS NECESSARY?? I THINK NOT
+        //var configureClientsGrid = configureClientsGrid;
+        //var getClientsForSetup = getClientsForSetup;
+
+
+
+
+
+
+
+
+        initialize(); // activate();
+
+        //#region Scope Methods
+
+        //Initializes page
+        function initialize() {
+            configureClientsGrid();
+            getClientsForSetup();
+        }
+
+        //Open Add/Edit popup
+        function openPopup(isEdit, client) {
+            var _clientToEdit = angular.copy(client);
+
+            var modalInstance = $modal.open({
+                windowClass: 'modalWindow',
+                templateUrl: './app/views/ClientPopup.html',
+                controller: 'clientPopupCtrl',
+                resolve: {
+                    items: function () {
+                        return {
+                            isEdit: isEdit,
+                            client: _clientToEdit,
+                            applicationTypes: vm.applicationTypes
+                        };
                     }
                 }
-            }
+            });
+
+            modalInstance.result.then(function (result) {
+                if (result.isRefresh) {
+                    if (result.isEdition) {
+                        // Refresh grid after edition
+                        for (var i = 0; i < vm.gridClientsOptions.dataList.length; i++) {
+                            if (vm.gridClientsOptions.dataList[i].clientId == result.client.clientId) {
+                                vm.gridClientsOptions.dataList[i] = result.client;
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        // Refresh grid after insertion
+                        vm.gridClientsOptions.dataList.push(result.client);
+                    }
+                }
+            }, function () {
+
+            });
         };
-    };
 
-    //Get all clients for setup
-    var getClientsForSetup = function () {
-        espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.clientsSetup, false).then(function (data) {
-            $scope.gridClientsOptions.dataList = data.clients;
-            $scope.applicationTypes = data.applicationTypes;
-        });
-    };
-
-    //#endregion Private Methods
-
-    //#region Scope Methods
-
-    //Initialize page
-    $scope.initialize = function () {
-        configureClientsGrid();
-        getClientsForSetup();
-    };
-
-    //Open Add/Edit popup
-    $scope.openPopup = function (isEdit, client) {
-        var _clientToEdit = angular.copy(client);
-
-        var modalInstance = $modal.open({
-            windowClass: 'modalWindow',
-            templateUrl: './app/views/ClientPopup.html',
-            controller: 'clientPopupCtrl',
-            resolve: {
-                items: function () {
-                    return {
-                        isEdit: isEdit,
-                        client: _clientToEdit,
-                        applicationTypes: $scope.applicationTypes
-                    };
+        //Open confirm popup to delete client
+        function deleteClient(client, index) {
+            //build the details list
+            //check if the user has the requested permission
+            var details = [
+                {
+                    name: "Client Id", value: client.clientId
+                },
+                {
+                    name: "Description", value: client.description,
                 }
-            }
-        });
+            ];
 
-        modalInstance.result.then(function (result) {
-            if (result.isRefresh) {
-                if (result.isEdition) {
-                    // Refresh grid after edition
-                    for (var i = 0; i < $scope.gridClientsOptions.dataList.length; i++) {
-                        if ($scope.gridClientsOptions.dataList[i].clientId == result.client.clientId) {
-                            $scope.gridClientsOptions.dataList[i] = result.client;
-                            break;
+            var modalOptions = {
+                headerText: 'Please Confirm',
+                message: 'Are you sure you want to delete this client?',
+                buttons: { ok: 'Yes', cancel: 'No' },
+                modalType: 'confirm',
+                details: details
+            };
+
+            var modal = modalService.modal(modalOptions);
+            modal.then(function (result) {
+                clientFactory.deleteClient(client.cliendId)
+                    .then(function (data) {
+                        //vm.gridClientsOptions.dataList.splice(index, 1);
+
+                        var originalIndex = vm.gridClientsOptions.dataList.indexOf(client);
+                        if (originalIndex != -1) {
+                            vm.gridClientsOptions.dataList.splice(originalIndex, 1);
+                    }
+                });
+            }, function () {
+
+            });
+        }
+
+        //#endregion Scope Methods
+
+        //#region Private Methods
+
+        //Set the clients grid configuration
+        function configureClientsGrid()
+        { 
+            var columnList = [
+                { name: 'clientId', header: 'Client Id', isFilter: false, isOrder: true },
+                { name: 'description', header: 'Description', isFilter: false, isOrder: true },
+                { name: 'applicationType.description', header: 'Application Type', isFilter: false, isOrder: true },
+                { name: 'accessTokenExpireTime', header: 'Access Token Expire Time', isFilter: false, isOrder: true },
+                { name: 'refreshTokenLifeTime', header: 'Refresh Token Life Time', isFilter: false, isOrder: true },
+                { name: 'allowedOrigin', header: 'Allowed Origin', isFilter: true, isOrder: true },
+                { name: 'isActive', header: 'Is Active', isFilter: true, isOrder: true }
+            ];
+
+            this.gridClientsOptions = {
+                columnList: columnList,
+                noDataMessage: 'There are no clients',
+                animate: true,
+                crudOptions: {
+                    enable: true,
+                    insert: {
+                        security: {
+                            route: '/client',
+                            action: 'insert'
+                        },
+                        method: function () {
+                            openPopup(false, null);
+                        }
+                    },
+                    edit: {
+                        security: {
+                            route: '/client',
+                            action: 'edit'
+                        },
+                        method: function (data) {
+                            openPopup(true, data);
+                        }
+                    },
+                    delete: {
+                        security: {
+                            route: '/client',
+                            action: 'delete'
+                        },
+                        method: function (data) {
+                            deleteClient(data);
                         }
                     }
                 }
-                else {
-                    // Refresh grid after insertion
-                    $scope.gridClientsOptions.dataList.push(result.client);
-                }
-            }
-        }, function () {
+            };
+        }
 
-        });
-    };
+        //Get all clients for setup
+        function getClientsForSetup()
+        {
+            clientFactory.getClientsForSetup()
+                .then(function (data) {
+                    vm.gridClientsOptions.dataList = data.clients;
+                    vm.applicationTypes = data.applicationTypes;
+                });
+        }
 
-    //Open confirm popup to delete client
-    $scope.deleteClient = function (client, index) {
-        //build the details list
-        //check if the user has the requested permission
-        var details = [
-            {
-                name: "Client Id", value: client.clientId
-            },
-            {
-                name: "Description", value: client.description,
-            }
-        ];
-
-        var modalOptions = {
-            headerText: 'Please Confirm',
-            message: 'Are you sure you want to delete this client?',
-            buttons: { ok: 'Yes', cancel: 'No' },
-            modalType: 'confirm',
-            details: details
-        };
-
-        var modal = modalService.modal(modalOptions);
-        modal.then(function (result) {
-            espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteClient.replace("{clientId}", client.clientId), false).then(function (data) {
-                //$scope.gridClientsOptions.dataList.splice(index, 1);
-
-                var originalIndex = $scope.gridClientsOptions.dataList.indexOf(client);
-                if (originalIndex != -1) {
-                    $scope.gridClientsOptions.dataList.splice(originalIndex, 1);
-                }
-            });
-        }, function () {
-
-        });
+        //#endregion Private Methods
     }
-
-    //#endregion Scope Methods
-}
+})();
 ///#source 1 1 /app/controllers/clientPopupController.js
 'use strict';
 
@@ -900,3 +968,52 @@ function match() {
         }
     };
 }
+///#source 1 1 /app/services/clientFactory.js
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .factory('clientFactory', clientFactory);
+
+    clientFactory.$inject = ['webapiConstants', 'jumuroCrudRESTService', 'webapiAppConfigConstants'];
+
+    function clientFactory(webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+        var service = {
+            getClientsForSetup: getClientsForSetup,
+            deleteClient: deleteClient
+        };
+
+        return service;
+
+        function getClientsForSetup() {
+            return espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.clientsSetup, false)
+                .then(getClientsForSetupComplete)
+                .catch(getClientsForSetupFailed);
+
+            function getClientsForSetupComplete(data) {
+                return data;
+            }
+
+            function getClientsForSetupFailed(error) {
+                //Log error
+            }
+        }
+
+        function deleteClient(clientId) {
+            return espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteClient.replace("{clientId}", clientId), false)
+                .then(deleteClientComplete)
+                .catch(deleteClientFailed);
+
+            function deleteClientComplete(data) {
+                return data;
+            }
+
+            function deleteClientFailed(error) {
+                //Log error
+            }
+        }
+    }
+
+
+})();

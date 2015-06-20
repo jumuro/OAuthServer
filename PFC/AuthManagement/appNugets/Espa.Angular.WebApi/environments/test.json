@@ -2,5 +2,5 @@
     "appConfig": {
         "OAuthURL": "http://oauthtest.clcworld.com/token",
         "ApiURL": "http://oauthtest.clcworld.com/api/"
-    } 
+    }
 }
