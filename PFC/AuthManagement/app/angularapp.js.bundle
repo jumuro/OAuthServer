@@ -11,6 +11,9 @@
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
     <file>/app/app.js</file>
+    <file>/app/app.config.js</file>
+    <file>/app/app.config.route.js</file>
+    <file>/app/app.run.js</file>
     <file>/app/controllers/appController.js</file>
     <file>/app/controllers/clientController.js</file>
     <file>/app/controllers/clientPopupController.js</file>
@@ -21,5 +24,6 @@
     <file>/app/controllers/userController.js</file>
     <file>/app/controllers/userPopupController.js</file>
     <file>/app/directives/matchDirective.js</file>
+    <file>/app/services/clientFactory.js</file>
   </files>
 </bundle>
