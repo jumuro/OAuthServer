@@ -978,7 +978,7 @@ function match() {
 
     clientFactory.$inject = ['webapiConstants', 'jumuroCrudRESTService', 'webapiAppConfigConstants'];
 
-    function clientFactory(webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+    function clientFactory(webapiConstants, jumuroCrudRESTService, webapiAppConfigConstants) {
         var service = {
             getClientsForSetup: getClientsForSetup,
             deleteClient: deleteClient
@@ -987,7 +987,7 @@ function match() {
         return service;
 
         function getClientsForSetup() {
-            return espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.clientsSetup, false)
+            return jumuroCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.clientsSetup, false)
                 .then(getClientsForSetupComplete)
                 .catch(getClientsForSetupFailed);
 
@@ -1001,7 +1001,7 @@ function match() {
         }
 
         function deleteClient(clientId) {
-            return espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteClient.replace("{clientId}", clientId), false)
+            return jumuroCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteClient.replace("{clientId}", clientId), false)
                 .then(deleteClientComplete)
                 .catch(deleteClientFailed);
 
