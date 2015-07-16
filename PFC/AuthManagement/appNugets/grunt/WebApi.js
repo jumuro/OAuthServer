@@ -1,4 +1,5 @@
 ﻿
+
 module.exports = function (grunt) {
 
     //create replace target for each environment
@@ -7,13 +8,13 @@ module.exports = function (grunt) {
         grunt.config(['replace', target], {
             options: {
                 patterns: [{
-                    json: grunt.file.readJSON('./appNugets/Espa.Angular.WebApi/environments/' + environment + '.json')
+                    json: grunt.file.readJSON('./appNugets/Jumuro.Angular.WebApi/environments/' + environment + '.json')
                 }],
             },
             files: [{
                 flatten: true,
-                src: ['./appNugets/Espa.Angular.WebApi/Constants/gruntReplaceSource.js'],
-                dest: './appNugets/Espa.Angular.WebApi/Constants/appConfigConstants.js'
+                src: ['./appNugets/Jumuro.Angular.WebApi/Constants/gruntReplaceSource.js'],
+                dest: './appNugets/Jumuro.Angular.WebApi/Constants/appConfigConstants.js'
             }]
         });
 
@@ -33,15 +34,16 @@ module.exports = function (grunt) {
             throw new Error('You forgot to set the tfsWorkSpace property within the config file (' + readConfJSON + ')')
         }
         //check if the developer has configured the grunt config file
-        if (!config.project.absoluteProjectPath) {
-            throw new Error('You forgot to set the absoluteProjectPath property within the config file (' + readConfJSON + ')')
+        var path = require('path');
+        var projectPath = path.resolve('gruntfile.js');
+        if (!projectPath) {
+            throw new Error('Unable to determine the absolute project path')
         }
 
         var target = tfs + '_WebApi'
 
-        var command = 'cd ' + config.project.absoluteProjectPath + '&' +
-                      '"C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Common7\\IDE\\tf.exe" ' + tfs + ' ' +
-                      config.project.tfsWorkSpace + 'appnugets\\espa.angular.WebApi\\constants\\appConfigConstants.js';
+        var command = '"C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Common7\\IDE\\tf.exe" ' + tfs + ' ' +
+                      config.project.tfsWorkSpace + 'appnugets\\jumuro.angular.WebApi\\constants\\appConfigConstants.js';
 
         grunt.config(['exec', target], {
             cmd: command
