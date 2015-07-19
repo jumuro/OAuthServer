@@ -85,11 +85,11 @@
     // Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
     //'mgcrea.ngStrap'
     angular.module('app')
-        .controller('appController', appController);
+        .controller('AppController', AppController);
 
     AppController.$inject = ['$scope', 'webapiConstants'];
 
-    function appController($scope, webapiConstants) {
+    function AppController($scope, webapiConstants) {
 
     }
 })();
