@@ -1,11 +1,11 @@
 ﻿'use strict';
 
 angular.module('app')
-    .controller('refreshTokenCtrl', refreshTokenCtrl);
+    .controller('RefreshTokenController', RefreshTokenController);
 
-refreshTokenCtrl.$inject = ['$scope', 'modalService', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+RefreshTokenController.$inject = ['$scope', 'modalService', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
 
-function refreshTokenCtrl($scope, modalService, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function RefreshTokenController($scope, modalService, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the refresh tokens grid configuration

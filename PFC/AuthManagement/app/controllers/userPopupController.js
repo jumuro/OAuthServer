@@ -1,11 +1,11 @@
 ﻿'use strict';
 
 angular.module('app')
-    .controller('userPopupCtrl', userPopupCtrl);
+    .controller('UserPopupController', UserPopupController);
 
-userPopupCtrl.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+UserPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function userPopupCtrl($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function UserPopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page

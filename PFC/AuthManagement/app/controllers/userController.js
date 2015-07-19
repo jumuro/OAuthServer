@@ -1,11 +1,11 @@
 ﻿'use strict';
 
 angular.module('app')
-    .controller('userCtrl', userCtrl);
+    .controller('UserController', UserController);
 
-userCtrl.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+UserController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
 
-function userCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function UserController($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the users grid configuration
@@ -81,7 +81,7 @@ function userCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCr
         var modalInstance = $modal.open({
             windowClass: 'modalWindow',
             templateUrl: './app/views/UserPopup.html',
-            controller: 'userPopupCtrl',
+            controller: 'UserPopupController',
             resolve: {
                 items: function () {
                     return {

@@ -1,6 +1,0 @@
-﻿{
-    "appConfig": {
-        "OAuthURL": "https://oauth.clcworld.com/token",
-        "ApiURL": "https://oauth.clcworld.com/api/"
-    }
-}
