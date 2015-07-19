@@ -14,15 +14,14 @@
     <file>/app/app.config.js</file>
     <file>/app/app.config.route.js</file>
     <file>/app/app.run.js</file>
-    <file>/app/controllers/appController.js</file>
-    <file>/app/controllers/clientController.js</file>
-    <file>/app/controllers/clientPopupController.js</file>
-    <file>/app/controllers/modalController.js</file>
-    <file>/app/controllers/refreshTokenController.js</file>
-    <file>/app/controllers/roleController.js</file>
-    <file>/app/controllers/rolePopupController.js</file>
-    <file>/app/controllers/userController.js</file>
-    <file>/app/controllers/userPopupController.js</file>
+    <file>/app/controllers/AppController.js</file>
+    <file>/app/controllers/ClientController.js</file>
+    <file>/app/controllers/ClientPopupController.js</file>
+    <file>/app/controllers/RefreshTokenController.js</file>
+    <file>/app/controllers/RoleController.js</file>
+    <file>/app/controllers/RolePopupController.js</file>
+    <file>/app/controllers/UserController.js</file>
+    <file>/app/controllers/UserPopupController.js</file>
     <file>/app/directives/matchDirective.js</file>
     <file>/app/services/clientFactory.js</file>
   </files>

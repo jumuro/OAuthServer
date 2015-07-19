@@ -2,11 +2,11 @@
     'use strict';
 
     angular.module('app')
-        .controller('ClientCtrl', ClientCtrl);
+        .controller('ClientController', ClientController);
 
-    ClientCtrl.$inject = ['modalService', '$modal', 'toaster', 'clientFactory'];
+    ClientController.$inject = ['modalService', '$modal', 'toaster', 'clientFactory'];
 
-    function ClientCtrl(modalService, $modal, toaster, clientFactory) {
+    function ClientController(modalService, $modal, toaster, clientFactory) {
         var vm = this;
 
         vm.applicationTypes = [];
@@ -48,7 +48,7 @@
             var modalInstance = $modal.open({
                 windowClass: 'modalWindow',
                 templateUrl: './app/views/ClientPopup.html',
-                controller: 'clientPopupCtrl',
+                controller: 'ClientPopupController',
                 resolve: {
                     items: function () {
                         return {

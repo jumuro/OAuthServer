@@ -1,0 +1,6 @@
+﻿{
+    "appConfig": {
+        "oAuthURL": "http://localhost:64188/token",
+        "oAuthClientId": "ngAdmin"
+    }
+}

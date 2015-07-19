@@ -1,11 +1,11 @@
 ﻿'use strict';
 
 angular.module('app')
-    .controller('roleCtrl', roleCtrl);
+    .controller('RoleController', RoleController);
 
-roleCtrl.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+RoleController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
 
-function roleCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function RoleController($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the roles grid configuration
@@ -75,7 +75,7 @@ function roleCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCr
         var modalInstance = $modal.open({
             windowClass: 'modalWindow',
             templateUrl: './app/views/RolePopup.html',
-            controller: 'rolePopupCtrl',
+            controller: 'RolePopupController',
             resolve: {
                 items: function () {
                     return {

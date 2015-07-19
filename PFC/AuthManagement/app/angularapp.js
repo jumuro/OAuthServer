@@ -5,9 +5,8 @@
     // Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
     //'mgcrea.ngStrap'
     angular.module('app', ['ngRoute', 'ngLocale',
-                           'espa.crudRest', 'espa.publicOAuth', 'espa.spinner', 'espa.modal', 'espa.grid', 'espa.validations',
-                           'espa.intranet', 'espa.errorHandling', 'espa.webapi']);
-
+                           'jumuro.crudRest', 'espa.publicOAuth', 'jumuro.spinner', 'jumuro.modal', 'jumuro.grid', 'espa.validations',
+                           'espa.intranet', 'espa.errorHandling', 'jumuro.webapi']);
 })();
 ///#source 1 1 /app/app.config.js
 (function () {
@@ -34,33 +33,29 @@
     configureRoute.$inject = ['$routeProvider'];
 
     function configureRoute($routeProvider) {
-        $routeProvider.
-            when('/role', {
-                templateUrl: './app/views/role.html',
-                controller: 'roleCtrl',
-                menuTitle: 'Roles',
-                levelTree: [{ title: "Security", icon: "fa fa-lock" }, { title: "Auth Management", icon: "" }, { title: "Roles", icon: "" }]
-            }).
-            when('/client', {
-                templateUrl: './app/views/client.html',
-                controller: 'ClientCtrl',
-                controllerAs: 'vm',
-                menuTitle: 'Clients',
-                levelTree: [{ title: "Security", icon: "fa fa-lock" }, { title: "Auth Management", icon: "" }, { title: "Clients", icon: "" }]
-            }).
-            when('/refreshToken', {
-                templateUrl: './app/views/refreshtoken.html',
-                controller: 'refreshTokenCtrl',
-                menuTitle: 'RefreshTokens',
-                levelTree: [{ title: "Security", icon: "fa fa-lock" }, { title: "Auth Management", icon: "" }, { title: "RefreshTokens", icon: "" }]
-            }).
-            when('/user', {
-                templateUrl: './app/views/user.html',
-                controller: 'userCtrl',
-                menuTitle: 'Users',
-                levelTree: [{ title: "Security", icon: "fa fa-lock" }, { title: "Auth Management", icon: "" }, { title: "Users", icon: "" }]
+        $routeProvider
+            .when('/login', {
+                templateUrl: './app/views/login.html',
+                controller: 'LoginController'
             })
-            //otherwise({ redirectTo: '/role' });
+            .when('/role', {
+                templateUrl: './app/views/role.html',
+                controller: 'RoleController'
+            })
+            .when('/client', {
+                templateUrl: './app/views/client.html',
+                controller: 'ClientController',
+                controllerAs: 'vm'
+            })
+            .when('/refreshToken', {
+                templateUrl: './app/views/refreshtoken.html',
+                controller: 'RefreshTokenController'
+            })
+            .when('/user', {
+                templateUrl: './app/views/user.html',
+                controller: 'UserController'
+            })
+        //otherwise({ redirectTo: '/role' });
     }
 })();
 ///#source 1 1 /app/app.run.js
@@ -83,31 +78,31 @@
         });
     }
 })();
-///#source 1 1 /app/controllers/appController.js
+///#source 1 1 /app/controllers/AppController.js
 (function () {
     'use strict';
 
     // Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
     //'mgcrea.ngStrap'
     angular.module('app')
-        .controller('appCtrl', appCtrl);
+        .controller('appController', appController);
 
-    appCtrl.$inject = ['$scope', 'webapiConstants'];
+    AppController.$inject = ['$scope', 'webapiConstants'];
 
-    function appCtrl($scope, webapiConstants) {
+    function appController($scope, webapiConstants) {
 
     }
 })();
-///#source 1 1 /app/controllers/clientController.js
+///#source 1 1 /app/controllers/ClientController.js
 (function() {
     'use strict';
 
     angular.module('app')
-        .controller('ClientCtrl', ClientCtrl);
+        .controller('ClientController', ClientController);
 
-    ClientCtrl.$inject = ['modalService', '$modal', 'toaster', 'clientFactory'];
+    ClientController.$inject = ['modalService', '$modal', 'toaster', 'clientFactory'];
 
-    function ClientCtrl(modalService, $modal, toaster, clientFactory) {
+    function ClientController(modalService, $modal, toaster, clientFactory) {
         var vm = this;
 
         vm.applicationTypes = [];
@@ -149,7 +144,7 @@
             var modalInstance = $modal.open({
                 windowClass: 'modalWindow',
                 templateUrl: './app/views/ClientPopup.html',
-                controller: 'clientPopupCtrl',
+                controller: 'ClientPopupController',
                 resolve: {
                     items: function () {
                         return {
@@ -286,15 +281,15 @@
         //#endregion Private Methods
     }
 })();
-///#source 1 1 /app/controllers/clientPopupController.js
+///#source 1 1 /app/controllers/ClientPopupController.js
 'use strict';
 
 angular.module('app')
-    .controller('clientPopupCtrl', clientPopupCtrl);
+    .controller('ClientPopupController', ClientPopupController);
 
-clientPopupCtrl.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+ClientPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function clientPopupCtrl($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function ClientPopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page
@@ -362,37 +357,15 @@ function clientPopupCtrl($scope, $modalInstance, webapiConstants, espaCrudRESTSe
 
     //#endregion Scope Methods
 }
-///#source 1 1 /app/controllers/modalController.js
-'use strict';
-
-// Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
-//'mgcrea.ngStrap'
-var app = angular.module('app');
-
-app.controller('modalInstanceCtrl', ['$scope', '$modalInstance', 'modalScope', function ($scope, $modalInstance, modalScope) {
-    $scope.buttons = modalScope.buttons;
-    $scope.message = modalScope.message;
-    $scope.headerText = modalScope.headerText;
-    $scope.details = modalScope.details;
-
-    $scope.ok = function () {
-        $modalInstance.close(true);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-}]);
-
-///#source 1 1 /app/controllers/refreshTokenController.js
+///#source 1 1 /app/controllers/RefreshTokenController.js
 'use strict';
 
 angular.module('app')
-    .controller('refreshTokenCtrl', refreshTokenCtrl);
+    .controller('RefreshTokenController', RefreshTokenController);
 
-refreshTokenCtrl.$inject = ['$scope', 'modalService', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+RefreshTokenController.$inject = ['$scope', 'modalService', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
 
-function refreshTokenCtrl($scope, modalService, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function RefreshTokenController($scope, modalService, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the refresh tokens grid configuration
@@ -502,15 +475,15 @@ function refreshTokenCtrl($scope, modalService, toaster, webapiConstants, espaCr
 
     //#endregion Scope Methods
 }
-///#source 1 1 /app/controllers/roleController.js
+///#source 1 1 /app/controllers/RoleController.js
 'use strict';
 
 angular.module('app')
-    .controller('roleCtrl', roleCtrl);
+    .controller('RoleController', RoleController);
 
-roleCtrl.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+RoleController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
 
-function roleCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function RoleController($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the roles grid configuration
@@ -580,7 +553,7 @@ function roleCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCr
         var modalInstance = $modal.open({
             windowClass: 'modalWindow',
             templateUrl: './app/views/RolePopup.html',
-            controller: 'rolePopupCtrl',
+            controller: 'RolePopupController',
             resolve: {
                 items: function () {
                     return {
@@ -643,15 +616,15 @@ function roleCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCr
 
     //#endregion Scope Methods
 }
-///#source 1 1 /app/controllers/rolePopupController.js
+///#source 1 1 /app/controllers/RolePopupController.js
 'use strict';
 
 angular.module('app')
-    .controller('rolePopupCtrl', rolePopupCtrl);
+    .controller('RolePopupController', RolePopupController);
 
-rolePopupCtrl.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+RolePopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function rolePopupCtrl($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function RolePopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page
@@ -710,15 +683,15 @@ function rolePopupCtrl($scope, $modalInstance, webapiConstants, espaCrudRESTServ
 
     //#endregion Scope Methods
 }
-///#source 1 1 /app/controllers/userController.js
+///#source 1 1 /app/controllers/UserController.js
 'use strict';
 
 angular.module('app')
-    .controller('userCtrl', userCtrl);
+    .controller('UserController', UserController);
 
-userCtrl.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+UserController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
 
-function userCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function UserController($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the users grid configuration
@@ -794,7 +767,7 @@ function userCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCr
         var modalInstance = $modal.open({
             windowClass: 'modalWindow',
             templateUrl: './app/views/UserPopup.html',
-            controller: 'userPopupCtrl',
+            controller: 'UserPopupController',
             resolve: {
                 items: function () {
                     return {
@@ -861,15 +834,15 @@ function userCtrl($scope, modalService, $modal, toaster, webapiConstants, espaCr
 
     //#endregion Scope Methods
 }
-///#source 1 1 /app/controllers/userPopupController.js
+///#source 1 1 /app/controllers/UserPopupController.js
 'use strict';
 
 angular.module('app')
-    .controller('userPopupCtrl', userPopupCtrl);
+    .controller('UserPopupController', UserPopupController);
 
-userPopupCtrl.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+UserPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function userPopupCtrl($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function UserPopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page
