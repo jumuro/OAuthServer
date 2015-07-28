@@ -5,8 +5,7 @@
     // Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
     //'mgcrea.ngStrap'
     angular.module('app', ['ngRoute', 'ngLocale',
-                           'jumuro.crudRest', 'espa.publicOAuth', 'jumuro.spinner', 'jumuro.modal', 'jumuro.grid', 'espa.validations',
-                           'espa.intranet', 'espa.errorHandling', 'jumuro.webapi']);
+                           'jumuro.crudRest', 'jumuro.oAuth', 'jumuro.spinner', 'jumuro.modal', 'jumuro.grid', 'jumuro.validations', 'jumuro.webapi']); //'espa.errorHandling',
 })();
 ///#source 1 1 /app/app.config.js
 (function () {
@@ -55,7 +54,7 @@
                 templateUrl: './app/views/user.html',
                 controller: 'UserController'
             })
-        //otherwise({ redirectTo: '/role' });
+            .otherwise({ redirectTo: '/login' });
     }
 })();
 ///#source 1 1 /app/app.run.js

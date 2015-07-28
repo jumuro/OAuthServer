@@ -29,6 +29,6 @@
                 templateUrl: './app/views/user.html',
                 controller: 'UserController'
             })
-        //otherwise({ redirectTo: '/role' });
+            .otherwise({ redirectTo: '/login' });
     }
 })();
