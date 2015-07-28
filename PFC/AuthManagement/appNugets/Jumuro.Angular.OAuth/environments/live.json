@@ -1,6 +1,0 @@
-﻿{
-    "appConfig": {
-        "oAuthURL": "https://liveurl/token",
-        "oAuthClientId": "ngAdmin"
-    }
-}

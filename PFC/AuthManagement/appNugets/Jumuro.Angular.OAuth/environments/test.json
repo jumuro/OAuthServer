@@ -1,6 +1,0 @@
-﻿{
-    "appConfig": {
-        "oAuthURL": "http://testurl/token",
-        "oAuthClientId": "ngAdmin"
-    }
-}
