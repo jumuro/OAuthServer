@@ -207,7 +207,7 @@ namespace OAuthServer.Services
                 if (userViewModel.Client != null && !string.IsNullOrEmpty(userViewModel.Client.ClientId))
                 {
                     _dbContext.UserClients.Add(new UserClient { UserId = createdUser.Id, ClientId = userViewModel.Client.ClientId });
-                    _dbContext.SaveChangesAsync();
+                    _dbContext.SaveChanges();
                 }
 
                 return createdUser;

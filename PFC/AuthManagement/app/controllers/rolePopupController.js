@@ -3,9 +3,9 @@
 angular.module('app')
     .controller('RolePopupController', RolePopupController);
 
-RolePopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+RolePopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'jumuroCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function RolePopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function RolePopupController($scope, $modalInstance, webapiConstants, jumuroCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page
@@ -33,7 +33,7 @@ function RolePopupController($scope, $modalInstance, webapiConstants, espaCrudRE
         $scope.resultPopUp.isRefresh = true;
 
         if (items.isEdit) {
-            espaCrudRESTService.restPut($scope.role, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putRole, false).then(function (data) {
+            jumuroCrudRESTService.restPut($scope.role, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putRole, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = true;
 
@@ -45,7 +45,7 @@ function RolePopupController($scope, $modalInstance, webapiConstants, espaCrudRE
             });
         }
         else {
-            espaCrudRESTService.restPost($scope.role, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postRole, false).then(function (data) {
+            jumuroCrudRESTService.restPost($scope.role, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postRole, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = false;
 

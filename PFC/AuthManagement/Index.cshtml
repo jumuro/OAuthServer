@@ -31,16 +31,17 @@
     <!--ng-infinite-scroll-->
     <script src="~/Scripts/ng-infinite-scroll.min.js"></script>
 
-    <!--Espa.Angular.WebApi-->
-    <script src="~/appNugets/Espa.Angular.WebApi/webapi.1.0.0.1.js"></script>
-    <script src="~/appNugets/Espa.Angular.WebApi/constants/appConfigConstants.js"></script>
-    <script src="~/app/constants/nugets/Espa.Angular.WebApi/webapiConstants.js"></script>
+    <!--WebApi-->
+    <script src="~/appNugets/Jumuro.Angular.WebApi/webapi.1.0.0.1.js"></script>
+    <script src="~/appNugets/Jumuro.Angular.WebApi/constants/appConfigConstants.js"></script>
+    <script src="~/app/constants/nugets/Jumuro.Angular.WebApi/webapiConstants.js"></script>
     @*CRUD REST*@
     <script src="~/appNugets/Jumuro.Angular.CrudREST/bundle/crudResTBundle.1.0.0.1.js"></script>
     @*Http Interceptor*@
     <script src="~/appNugets/Jumuro.Angular.HttpInterceptor/blundle/httpInterceptorBundle.1.0.0.1.js"></script>
-    @*Public OAuth*@
+    @*OAuth*@
     <script src="~/appNugets/Jumuro.Angular.OAuth/bundles/oauth.1.0.0.1.js"></script>
+    <script src="~/appNugets/Jumuro.Angular.OAuth/constants/appConfigConstants.js"></script>
     @*Spinner*@
     <script src="~/appNugets/Jumuro.Angular.Spinner/bundle/spinnerBundle.1.0.0.1.js"></script>
     @*Modal*@
@@ -56,7 +57,7 @@
     @*<script src="~/Scripts/stacktrace.js"></script>
     <script src="~/appNugets/Espa.Angular.ErrorHandling/bundle/errorHandlingBundle.1.0.0.6.js"></script>*@
     @*Toaster*@
-    <script src="~/scripts/toaster.min.js"></script>
+    <script src="~/scripts/toaster.js"></script>
 
     <script src="~/scripts/angular-filter.js"></script>
 </head>
@@ -64,13 +65,11 @@
     <toaster-container toaster-options="{'time-out': 5000, 'body-output-type': 'trustedHtml',  'position-class': 'toast-bottom-right'}"></toaster-container>
     <div id="wrapper">
         <div id="box">
-            <espa-menu></espa-menu>
-
             <div ng-view class="container main">
 
             </div>
 
-            <espa-spinner></espa-spinner>
+            <jumuro-spinner></jumuro-spinner>
         </div>
     </div>
 </body>

@@ -10,7 +10,7 @@ using Jumuro.WebApi.Extensions.ActionResults;
 
 namespace OAuthServer.Controllers
 {
-    [ApplicationAuthorize(Roles = "Admin")]
+    //[ApplicationAuthorize(Roles = "Admin")]
     [RoutePrefix("api/authserver/roles")]
     public class RoleController : ApiController
     {

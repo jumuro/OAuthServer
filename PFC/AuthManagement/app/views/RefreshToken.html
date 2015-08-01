@@ -2,11 +2,11 @@
     <div class="row box-sizing">
         <div class="container">
             <a class="btn btn-primary btn-xs col-md-3 col-md-push-9"
-               espa-display espa-displayroute="/refreshToken" espa-displayaction="refresh"
+               jumuro-display jumuro-displayroute="/refreshToken" jumuro-displayaction="refresh"
                ng-click="getRefreshTokens()" id="btnRefreshGrid"><i class="fa fa-refresh padding_right"></i>Refresh (showing {{gridRefreshTokensOptions.dataList.length}})</a>
         </div>
     </div>
     <div ng-init="initialize()" class="container">
-        <espa-grid espa-gridoptions="gridRefreshTokensOptions"></espa-grid>
+        <jumuro-grid jumuro-gridoptions="gridRefreshTokensOptions"></jumuro-grid>
     </div>
 </div>

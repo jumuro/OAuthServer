@@ -3,9 +3,9 @@
 angular.module('app')
     .controller('UserController', UserController);
 
-UserController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+UserController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'jumuroCrudRESTService', 'webapiAppConfigConstants'];
 
-function UserController($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function UserController($scope, modalService, $modal, toaster, webapiConstants, jumuroCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the users grid configuration
@@ -57,7 +57,7 @@ function UserController($scope, modalService, $modal, toaster, webapiConstants, 
 
     //Get all users for setup
     var getUsersForSetup = function () {
-        espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.usersSetup, false).then(function (data) {
+        jumuroCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.usersSetup, false).then(function (data) {
             $scope.gridUsersOptions.dataList = data.users;
             $scope.roles = data.roles;
             $scope.clients = data.clients;
@@ -135,7 +135,7 @@ function UserController($scope, modalService, $modal, toaster, webapiConstants, 
 
         var modal = modalService.modal(modalOptions);
         modal.then(function (result) {
-            espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteUser.replace("{userId}", user.userId), false).then(function (data) {
+            jumuroCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteUser.replace("{userId}", user.userId), false).then(function (data) {
                 var originalIndex = $scope.gridUsersOptions.dataList.indexOf(user);
                 if (originalIndex != -1) {
                     $scope.gridUsersOptions.dataList.splice(originalIndex, 1);

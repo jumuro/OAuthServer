@@ -135,7 +135,7 @@
                 { name: 'isActive', header: 'Is Active', isFilter: true, isOrder: true }
             ];
 
-            this.gridClientsOptions = {
+            vm.gridClientsOptions = {
                 columnList: columnList,
                 noDataMessage: 'There are no clients',
                 animate: true,
