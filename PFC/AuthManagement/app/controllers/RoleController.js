@@ -3,9 +3,9 @@
 angular.module('app')
     .controller('RoleController', RoleController);
 
-RoleController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+RoleController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'jumuroCrudRESTService', 'webapiAppConfigConstants'];
 
-function RoleController($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function RoleController($scope, modalService, $modal, toaster, webapiConstants, jumuroCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the roles grid configuration
@@ -53,7 +53,7 @@ function RoleController($scope, modalService, $modal, toaster, webapiConstants, 
 
     //Get all roles
     var getRoles = function () {
-        espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.getRoles, false).then(function (data) {
+        jumuroCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.getRoles, false).then(function (data) {
             $scope.gridRolesOptions.dataList = data;
         });
     };
@@ -125,7 +125,7 @@ function RoleController($scope, modalService, $modal, toaster, webapiConstants, 
 
         var modal = modalService.modal(modalOptions);
         modal.then(function (result) {
-            espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteRole.replace("{roleId}", role.id), false).then(function (data) {
+            jumuroCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteRole.replace("{roleId}", role.id), false).then(function (data) {
                 var originalIndex = $scope.gridRolesOptions.dataList.indexOf(role);
                 if (originalIndex != -1) {
                     $scope.gridRolesOptions.dataList.splice(originalIndex, 1);

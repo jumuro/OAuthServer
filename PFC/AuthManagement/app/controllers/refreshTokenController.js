@@ -3,9 +3,9 @@
 angular.module('app')
     .controller('RefreshTokenController', RefreshTokenController);
 
-RefreshTokenController.$inject = ['$scope', 'modalService', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+RefreshTokenController.$inject = ['$scope', 'modalService', 'toaster', 'webapiConstants', 'jumuroCrudRESTService', 'webapiAppConfigConstants'];
 
-function RefreshTokenController($scope, modalService, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function RefreshTokenController($scope, modalService, toaster, webapiConstants, jumuroCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the refresh tokens grid configuration
@@ -46,7 +46,7 @@ function RefreshTokenController($scope, modalService, toaster, webapiConstants, 
 
     //Get all refreshTokens
     var getRefreshTokens = function () {
-        espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.getRefreshTokens, false).then(function (data) {
+        jumuroCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.getRefreshTokens, false).then(function (data) {
             $scope.gridRefreshTokensOptions.dataList = data;
         });
     };
@@ -100,7 +100,7 @@ function RefreshTokenController($scope, modalService, toaster, webapiConstants, 
         modal.then(function (result) {
             // The RefreshTokenId is the hash of a Guid. It can contain symbols like '+' or '/'. Encode refreshTokenId with window.encodeURIComponent() function.
             var refreshTokenId = window.encodeURIComponent(refreshToken.refreshTokenId);
-            espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteRefreshToken.replace("{refreshTokenId}", refreshTokenId), false).then(function (data) {
+            jumuroCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteRefreshToken.replace("{refreshTokenId}", refreshTokenId), false).then(function (data) {
                 //$scope.gridRefreshTokensOptions.dataList.splice(index, 1);
                 
                 var originalIndex = $scope.gridRefreshTokensOptions.dataList.indexOf(refreshToken);

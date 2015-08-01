@@ -67,7 +67,7 @@
 
     runBlock.$inject = ['$rootScope'];
 
-    function runBlock(rootScope) {
+    function runBlock($rootScope) {
         $rootScope.title = "";
 
         $rootScope.$on('$routeChangeError', function (event, current, previous, error) {
@@ -230,7 +230,7 @@
                 { name: 'isActive', header: 'Is Active', isFilter: true, isOrder: true }
             ];
 
-            this.gridClientsOptions = {
+            vm.gridClientsOptions = {
                 columnList: columnList,
                 noDataMessage: 'There are no clients',
                 animate: true,
@@ -286,9 +286,9 @@
 angular.module('app')
     .controller('ClientPopupController', ClientPopupController);
 
-ClientPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+ClientPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'jumuroCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function ClientPopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function ClientPopupController($scope, $modalInstance, webapiConstants, jumuroCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page
@@ -325,7 +325,7 @@ function ClientPopupController($scope, $modalInstance, webapiConstants, espaCrud
         $scope.resultPopUp.isRefresh = true;
 
         if (items.isEdit) {
-            espaCrudRESTService.restPut($scope.client, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putClient, false).then(function (data) {
+            jumuroCrudRESTService.restPut($scope.client, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putClient, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = true;
 
@@ -337,7 +337,7 @@ function ClientPopupController($scope, $modalInstance, webapiConstants, espaCrud
             });
         }
         else {
-            espaCrudRESTService.restPost($scope.client, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postClient, false).then(function (data) {
+            jumuroCrudRESTService.restPost($scope.client, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postClient, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = false;
 
@@ -356,15 +356,45 @@ function ClientPopupController($scope, $modalInstance, webapiConstants, espaCrud
 
     //#endregion Scope Methods
 }
+///#source 1 1 /app/controllers/LoginController.js
+'use strict';
+
+angular.module('app')
+    .controller('LoginController', LoginController);
+
+LoginController.$inject = ['$scope', 'oAuthService', '$location', '$rootScope'];
+
+function LoginController($scope, oAuthService, $location, $rootScope) {
+    $scope.logIn = function () {
+        logInFunct();
+    }
+
+    $scope.loginKeyPress = function (keyEvent) {
+        if (keyEvent.which === 13) {
+            logInFunct();
+        }
+    }
+
+    var logInFunct = function () {
+        oAuthService.logIn($scope.login).then(function (data) {
+            $rootScope.user = $scope.login.username.toUpperCase();
+            $location.path('/roles');
+            $rootScope.isLoginCollapsed = true;
+        }, function () {
+
+        });
+    }
+}
+
 ///#source 1 1 /app/controllers/RefreshTokenController.js
 'use strict';
 
 angular.module('app')
     .controller('RefreshTokenController', RefreshTokenController);
 
-RefreshTokenController.$inject = ['$scope', 'modalService', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+RefreshTokenController.$inject = ['$scope', 'modalService', 'toaster', 'webapiConstants', 'jumuroCrudRESTService', 'webapiAppConfigConstants'];
 
-function RefreshTokenController($scope, modalService, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function RefreshTokenController($scope, modalService, toaster, webapiConstants, jumuroCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the refresh tokens grid configuration
@@ -405,7 +435,7 @@ function RefreshTokenController($scope, modalService, toaster, webapiConstants, 
 
     //Get all refreshTokens
     var getRefreshTokens = function () {
-        espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.getRefreshTokens, false).then(function (data) {
+        jumuroCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.getRefreshTokens, false).then(function (data) {
             $scope.gridRefreshTokensOptions.dataList = data;
         });
     };
@@ -459,7 +489,7 @@ function RefreshTokenController($scope, modalService, toaster, webapiConstants, 
         modal.then(function (result) {
             // The RefreshTokenId is the hash of a Guid. It can contain symbols like '+' or '/'. Encode refreshTokenId with window.encodeURIComponent() function.
             var refreshTokenId = window.encodeURIComponent(refreshToken.refreshTokenId);
-            espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteRefreshToken.replace("{refreshTokenId}", refreshTokenId), false).then(function (data) {
+            jumuroCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteRefreshToken.replace("{refreshTokenId}", refreshTokenId), false).then(function (data) {
                 //$scope.gridRefreshTokensOptions.dataList.splice(index, 1);
                 
                 var originalIndex = $scope.gridRefreshTokensOptions.dataList.indexOf(refreshToken);
@@ -480,9 +510,9 @@ function RefreshTokenController($scope, modalService, toaster, webapiConstants, 
 angular.module('app')
     .controller('RoleController', RoleController);
 
-RoleController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+RoleController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'jumuroCrudRESTService', 'webapiAppConfigConstants'];
 
-function RoleController($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function RoleController($scope, modalService, $modal, toaster, webapiConstants, jumuroCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the roles grid configuration
@@ -530,7 +560,7 @@ function RoleController($scope, modalService, $modal, toaster, webapiConstants, 
 
     //Get all roles
     var getRoles = function () {
-        espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.getRoles, false).then(function (data) {
+        jumuroCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.getRoles, false).then(function (data) {
             $scope.gridRolesOptions.dataList = data;
         });
     };
@@ -602,7 +632,7 @@ function RoleController($scope, modalService, $modal, toaster, webapiConstants, 
 
         var modal = modalService.modal(modalOptions);
         modal.then(function (result) {
-            espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteRole.replace("{roleId}", role.id), false).then(function (data) {
+            jumuroCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteRole.replace("{roleId}", role.id), false).then(function (data) {
                 var originalIndex = $scope.gridRolesOptions.dataList.indexOf(role);
                 if (originalIndex != -1) {
                     $scope.gridRolesOptions.dataList.splice(originalIndex, 1);
@@ -621,9 +651,9 @@ function RoleController($scope, modalService, $modal, toaster, webapiConstants, 
 angular.module('app')
     .controller('RolePopupController', RolePopupController);
 
-RolePopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+RolePopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'jumuroCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function RolePopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function RolePopupController($scope, $modalInstance, webapiConstants, jumuroCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page
@@ -651,7 +681,7 @@ function RolePopupController($scope, $modalInstance, webapiConstants, espaCrudRE
         $scope.resultPopUp.isRefresh = true;
 
         if (items.isEdit) {
-            espaCrudRESTService.restPut($scope.role, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putRole, false).then(function (data) {
+            jumuroCrudRESTService.restPut($scope.role, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putRole, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = true;
 
@@ -663,7 +693,7 @@ function RolePopupController($scope, $modalInstance, webapiConstants, espaCrudRE
             });
         }
         else {
-            espaCrudRESTService.restPost($scope.role, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postRole, false).then(function (data) {
+            jumuroCrudRESTService.restPost($scope.role, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postRole, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = false;
 
@@ -688,9 +718,9 @@ function RolePopupController($scope, $modalInstance, webapiConstants, espaCrudRE
 angular.module('app')
     .controller('UserController', UserController);
 
-UserController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'espaCrudRESTService', 'webapiAppConfigConstants'];
+UserController.$inject = ['$scope', 'modalService', '$modal', 'toaster', 'webapiConstants', 'jumuroCrudRESTService', 'webapiAppConfigConstants'];
 
-function UserController($scope, modalService, $modal, toaster, webapiConstants, espaCrudRESTService, webapiAppConfigConstants) {
+function UserController($scope, modalService, $modal, toaster, webapiConstants, jumuroCrudRESTService, webapiAppConfigConstants) {
     //#region Private Methods
 
     //Set the users grid configuration
@@ -742,7 +772,7 @@ function UserController($scope, modalService, $modal, toaster, webapiConstants, 
 
     //Get all users for setup
     var getUsersForSetup = function () {
-        espaCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.usersSetup, false).then(function (data) {
+        jumuroCrudRESTService.restGet(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.usersSetup, false).then(function (data) {
             $scope.gridUsersOptions.dataList = data.users;
             $scope.roles = data.roles;
             $scope.clients = data.clients;
@@ -820,7 +850,7 @@ function UserController($scope, modalService, $modal, toaster, webapiConstants, 
 
         var modal = modalService.modal(modalOptions);
         modal.then(function (result) {
-            espaCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteUser.replace("{userId}", user.userId), false).then(function (data) {
+            jumuroCrudRESTService.restDelete(webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.deleteUser.replace("{userId}", user.userId), false).then(function (data) {
                 var originalIndex = $scope.gridUsersOptions.dataList.indexOf(user);
                 if (originalIndex != -1) {
                     $scope.gridUsersOptions.dataList.splice(originalIndex, 1);
@@ -839,9 +869,9 @@ function UserController($scope, modalService, $modal, toaster, webapiConstants, 
 angular.module('app')
     .controller('UserPopupController', UserPopupController);
 
-UserPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+UserPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'jumuroCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function UserPopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function UserPopupController($scope, $modalInstance, webapiConstants, jumuroCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page
@@ -886,7 +916,7 @@ function UserPopupController($scope, $modalInstance, webapiConstants, espaCrudRE
         $scope.resultPopUp.isRefresh = true;
 
         if (items.isEdit) {
-            espaCrudRESTService.restPut($scope.user, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putUser, false).then(function (data) {
+            jumuroCrudRESTService.restPut($scope.user, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putUser, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = true;
 
@@ -898,7 +928,7 @@ function UserPopupController($scope, $modalInstance, webapiConstants, espaCrudRE
             });
         }
         else {
-            espaCrudRESTService.restPost($scope.user, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postUser, false).then(function (data) {
+            jumuroCrudRESTService.restPost($scope.user, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postUser, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = false;
 

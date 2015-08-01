@@ -7,7 +7,7 @@
 
     runBlock.$inject = ['$rootScope'];
 
-    function runBlock(rootScope) {
+    function runBlock($rootScope) {
         $rootScope.title = "";
 
         $rootScope.$on('$routeChangeError', function (event, current, previous, error) {

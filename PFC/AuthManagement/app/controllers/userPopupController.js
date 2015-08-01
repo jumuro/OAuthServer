@@ -3,9 +3,9 @@
 angular.module('app')
     .controller('UserPopupController', UserPopupController);
 
-UserPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'espaCrudRESTService', 'items', 'webapiAppConfigConstants'];
+UserPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'jumuroCrudRESTService', 'items', 'webapiAppConfigConstants'];
 
-function UserPopupController($scope, $modalInstance, webapiConstants, espaCrudRESTService, items, webapiAppConfigConstants) {
+function UserPopupController($scope, $modalInstance, webapiConstants, jumuroCrudRESTService, items, webapiAppConfigConstants) {
     //#region Scope Methods
 
     //Initialize page
@@ -50,7 +50,7 @@ function UserPopupController($scope, $modalInstance, webapiConstants, espaCrudRE
         $scope.resultPopUp.isRefresh = true;
 
         if (items.isEdit) {
-            espaCrudRESTService.restPut($scope.user, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putUser, false).then(function (data) {
+            jumuroCrudRESTService.restPut($scope.user, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putUser, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = true;
 
@@ -62,7 +62,7 @@ function UserPopupController($scope, $modalInstance, webapiConstants, espaCrudRE
             });
         }
         else {
-            espaCrudRESTService.restPost($scope.user, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postUser, false).then(function (data) {
+            jumuroCrudRESTService.restPost($scope.user, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postUser, false).then(function (data) {
                 //Mark as edition
                 $scope.resultPopUp.isEdition = false;
 

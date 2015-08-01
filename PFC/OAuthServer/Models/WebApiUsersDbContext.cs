@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using AuthServer.Migrations;
 //using OAuthServer.Migrations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -20,7 +21,7 @@ namespace OAuthServer.Models
         public OAuthServerDbContext()
             : base("DefaultConnection")
         {
-           // Database.SetInitializer<OAuthServerDbContext>(new MigrateDatabaseToLatestVersion<OAuthServerDbContext, Configuration>());
+           Database.SetInitializer<OAuthServerDbContext>(new MigrateDatabaseToLatestVersion<OAuthServerDbContext, Configuration>());
         }
 
         public DbSet<Client> Clients { get; set; }

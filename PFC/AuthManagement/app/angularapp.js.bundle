@@ -17,6 +17,7 @@
     <file>/app/controllers/AppController.js</file>
     <file>/app/controllers/ClientController.js</file>
     <file>/app/controllers/ClientPopupController.js</file>
+    <file>/app/controllers/LoginController.js</file>
     <file>/app/controllers/RefreshTokenController.js</file>
     <file>/app/controllers/RoleController.js</file>
     <file>/app/controllers/RolePopupController.js</file>
