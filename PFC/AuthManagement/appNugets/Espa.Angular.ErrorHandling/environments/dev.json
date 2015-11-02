@@ -1,7 +1,0 @@
-﻿{
-    "appConfig": 
-        {
-            "errorHanlingApiUrl":  "http://localhost:60000/api/error/log"
-        }
-    
-}
