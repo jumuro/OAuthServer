@@ -1,5 +1,0 @@
-﻿{
-    "appConfig": {
-        "errorHanlingApiUrl": "http://tswccapitest.clcworld.com.local/api/error/log"
-    }
-}

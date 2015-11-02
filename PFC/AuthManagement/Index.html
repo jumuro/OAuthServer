@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="scripts/jquery-2.1.1.min.js"></script>
+    <script src="scripts/linq.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/angularjs.min.js"></script>
+    <script src="app/angularapp.js"></script>
+
+    <!--ng-infinite-scroll-->
+    <script src="Scripts/ng-infinite-scroll.min.js"></script>
+
+    <!--WebApi-->
+    <script src="appNugets/Jumuro.Angular.WebApi/webapi.1.0.0.1.js"></script>
+    <script src="appNugets/Jumuro.Angular.WebApi/constants/appConfigConstants.js"></script>
+    <script src="app/constants/nugets/Jumuro.Angular.WebApi/webapiConstants.js"></script>
+    <!--CRUD REST-->
+    <script src="appNugets/Jumuro.Angular.CrudREST/bundle/crudResTBundle.1.0.0.1.js"></script>
+    <!--Http Interceptor-->
+    <script src="appNugets/Jumuro.Angular.HttpInterceptor/blundle/httpInterceptorBundle.1.0.0.1.js"></script>
+    <!--OAuth-->
+    <script src="appNugets/Jumuro.Angular.OAuth/bundles/oauth.1.0.0.1.js"></script>
+    <script src="appNugets/Jumuro.Angular.OAuth/constants/appConfigConstants.js"></script>
+    <!--Spinner-->
+    <script src="appNugets/Jumuro.Angular.Spinner/bundle/spinnerBundle.1.0.0.1.js"></script>
+    <!--Modal-->
+    <script src="appNugets/Jumuro.Angular.Modal/bundle/modalBundle.1.0.0.1.js"></script>
+    <!--Grid-->
+    <script src="appNugets/Jumuro.Angular.Grid/bundle/gridBundle.1.0.0.1.js"></script>
+    <!--Validations-->
+    <script src="appNugets/Jumuro.Angular.Validations/bundle/validationDirectives.1.0.0.1.js"></script>
+
+    <script src="Scripts/moment.min.js"></script>
+
+    <!--Toaster-->
+    <script src="scripts/toaster.js"></script>
+
+    <script src="scripts/angular-filter.js"></script>
+</head>
+<body ng-app="app" ng-controller="AppController">
+    <toaster-container toaster-options="{'time-out': 5000, 'body-output-type': 'trustedHtml',  'position-class': 'toast-bottom-right'}"></toaster-container>
+    <body>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#/home">Admin</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-navbar">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="#/role">Roles</a>
+                            </li>
+                            <li>
+                                <a href="#/client">Clients</a>
+                            </li>
+                            <li>
+                                <a href="#/user">Users</a>
+                            </li>
+                            <li>
+                                <a href="#/refreshToken">Refresh Tokens</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container -->
+            </nav>
+            <div id="box">
+                <div ng-view class="container main">
+                </div>
+
+                <jumuro-spinner></jumuro-spinner>
+            </div>
+        </div>
+    </body>
+</html>
