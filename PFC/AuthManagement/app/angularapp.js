@@ -54,7 +54,10 @@
                 templateUrl: './app/views/user.html',
                 controller: 'UserController'
             })
-            .otherwise({ redirectTo: '/login' });
+            .when('/home', {
+                templateUrl: './app/views/home.html'
+            })
+            .otherwise({ redirectTo: '/home' });
     }
 })();
 ///#source 1 1 /app/app.run.js
@@ -378,7 +381,7 @@ function LoginController($scope, oAuthService, $location, $rootScope) {
     var logInFunct = function () {
         oAuthService.logIn($scope.login).then(function (data) {
             $rootScope.user = $scope.login.username.toUpperCase();
-            $location.path('/roles');
+            $location.path('/');
             $rootScope.isLoginCollapsed = true;
         }, function () {
 

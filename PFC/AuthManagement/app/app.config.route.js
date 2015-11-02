@@ -29,6 +29,9 @@
                 templateUrl: './app/views/user.html',
                 controller: 'UserController'
             })
-            .otherwise({ redirectTo: '/login' });
+            .when('/home', {
+                templateUrl: './app/views/home.html'
+            })
+            .otherwise({ redirectTo: '/home' });
     }
 })();
