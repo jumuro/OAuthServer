@@ -19,7 +19,7 @@ function LoginController($scope, oAuthService, $location, $rootScope) {
     var logInFunct = function () {
         oAuthService.logIn($scope.login).then(function (data) {
             $rootScope.user = $scope.login.username.toUpperCase();
-            $location.path('/roles');
+            $location.path('/');
             $rootScope.isLoginCollapsed = true;
         }, function () {
 

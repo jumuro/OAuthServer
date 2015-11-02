@@ -13,9 +13,9 @@ namespace Espa.Angular
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+            //AreaRegistration.RegisterAllAreas();
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
 }

@@ -97,17 +97,17 @@ namespace OAuthServer.Services
         /// <param name="password"></param>
         /// <param name="clientId"></param>
         /// <returns></returns>
-        public async Task<UserViewModel> GetUserAsync(string userName, string password, string clientId = null)
+    public async Task<UserViewModel> GetUserAsync(string userName, string password, string clientId = null)
+    {
+        var user = await _userManager.FindAsync(userName, password);
+
+        if (user == null || (clientId != null && user.Clients.Where(c => c.ClientId == clientId).Count() == 0))
         {
-            var user = await _userManager.FindAsync(userName, password);
-
-            if (user == null || (clientId != null && user.Clients.Where(c => c.ClientId == clientId).Count() == 0))
-            {
-                return null;
-            }
-
-            return await GetUserByIdAsync(user.Id);
+            return null;
         }
+
+        return await GetUserByIdAsync(user.Id);
+    }
 
         #endregion
 
