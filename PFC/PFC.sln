@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{040C3CDD-201
 	ProjectSection(SolutionItems) = preProject
 		Doc\Anteproyectodefindecarrera.docx = Doc\Anteproyectodefindecarrera.docx
 		Doc\Anteproyectodefindecarrera.odt = Doc\Anteproyectodefindecarrera.odt
+		Doc\Memoria.odt = Doc\Memoria.odt
 	EndProjectSection
 EndProject
 Global
