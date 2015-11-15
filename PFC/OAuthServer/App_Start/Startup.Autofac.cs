@@ -28,11 +28,9 @@ namespace OAuthServer
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<UserStore<User>>()
-                //.AsImplementedInterfaces<IUserStore<User>, ConcreteReflectionActivatorData>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<RoleStore<IdentityRole>>()
-                //.AsImplementedInterfaces<IRoleStore<IdentityRole>, ConcreteReflectionActivatorData>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ApplicationUserManager>()
