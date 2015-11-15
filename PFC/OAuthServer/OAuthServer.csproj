@@ -172,7 +172,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\Startup.OAuth.cs" />
     <Compile Include="App_Start\Startup.Autofac.cs" />
     <Compile Include="App_Start\Startup.Cors.cs" />
     <Compile Include="App_Start\Startup.WebApi.cs" />
