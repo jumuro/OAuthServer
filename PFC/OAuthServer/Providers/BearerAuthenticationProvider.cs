@@ -8,7 +8,7 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace OAuthServer.Providers
 {
-    public class ApplicationOAuthBearerProvider : OAuthBearerAuthenticationProvider
+    public class BearerAuthenticationProvider : OAuthBearerAuthenticationProvider
     {
         public override Task ValidateIdentity(OAuthValidateIdentityContext context)
         {

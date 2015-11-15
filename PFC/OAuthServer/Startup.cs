@@ -15,10 +15,10 @@ namespace OAuthServer
             //Configure CORS
             ConfigureCors(app);
 
-            //Configure Auth
+            //Configure OAuth
             ConfigureOAuth(app, dependencyResolver);
 
-            //Configure Web Api
+            //Configure Web API
             ConfigureWebApi(app, dependencyResolver);
         }
     }
