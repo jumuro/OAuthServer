@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Configuration;
 using System.Web.Http.Dependencies;
-using OAuthServer.Constants;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Infrastructure;
 using Microsoft.Owin.Security.OAuth;
+using OAuthServer.Constants;
 using Owin;
 
 namespace OAuthServer
@@ -24,7 +24,7 @@ namespace OAuthServer
                 LogoutPath = new PathString(Paths.LogoutPath),
             });
 
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            var OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
 #if DEBUG
                 AllowInsecureHttp = true,
@@ -35,7 +35,7 @@ namespace OAuthServer
                 RefreshTokenProvider = (IAuthenticationTokenProvider)dependencyResolver.GetService(typeof(IAuthenticationTokenProvider))
             };
 
-            OAuthBearerAuthenticationOptions OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
+            var OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
 
             // Token generation
             app.UseOAuthAuthorizationServer(OAuthServerOptions);

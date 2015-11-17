@@ -198,7 +198,6 @@
     <Compile Include="Models\UserClient.cs" />
     <Compile Include="Models\WebApiUsersDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\BearerAuthenticationProvider.cs" />
     <Compile Include="Providers\AuthorizationServerProvider.cs" />
     <Compile Include="Providers\RefreshTokenProvider.cs" />
     <Compile Include="Services\AuditService.cs" />
