@@ -177,7 +177,7 @@ function oAuthService($http, $q, $injector, ipCookie, oAuthConstants, oAuthAppCo
             })
             .success(function (data, status, headers, config) {
                 // Create cookie. TODO: we have to return user info
-                ipCookie(oAuthConstants.oAuthCookieName, data);
+                ipCookie(oAuthConstants.oAuthCookieName, data, { path: oAuthConstants.appPathName });
                 //Provisionally store user in a local storage until we return the user info from the oAuth api.
                 localStorage.setItem("login-info", JSON.stringify({ username: postData.username }));
 
@@ -215,3 +215,4 @@ function oAuthService($http, $q, $injector, ipCookie, oAuthConstants, oAuthAppCo
         return ok;
     };
 }
+
