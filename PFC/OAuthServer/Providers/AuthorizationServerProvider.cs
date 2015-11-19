@@ -83,11 +83,6 @@ namespace OAuthServer.Providers
             context.OwinContext.Set<string>("clientAllowedOrigin", client.AllowedOrigin);
             context.OwinContext.Set<string>("clientAccessTokenExpireTime", client.AccessTokenExpireTime.ToString());
             context.OwinContext.Set<string>("clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
-            //// Set the 
-            //if (client.AccessTokenExpireTimeSpan > 0)
-            //{
-            //    context.Options.AccessTokenExpireTimeSpan = client.AccessTokenExpireTimeSpan;
-            //}
 
             context.Validated();
         }
