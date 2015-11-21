@@ -97,30 +97,6 @@ namespace AuthServer.Migrations
                         Role = new RoleViewModel(adminRole)
                     });
                 }
-
-                //if (!context.Users.Any(u => u.UserName == "ESA_Signature"))
-                //{
-                //    _userService.InsertUser(new UserViewModel
-                //    {
-                //        UserName = "ESA_Signature",
-                //        Password = "20141015",
-                //        IsActive = true,
-                //        Client = new ClientViewModel(esaSignatureClient),
-                //        Role = new RoleViewModel(appRole)
-                //    });
-                //}
-
-                //if (!context.Users.Any(u => u.UserName == "ESA_TMAzure"))
-                //{
-                //    _userService.InsertUser(new UserViewModel
-                //    {
-                //        UserName = "ESA_TMAzure",
-                //        Password = "20141015",
-                //        IsActive = true,
-                //        Client = new ClientViewModel(esaTmAzureClient),
-                //        Role = new RoleViewModel(appRole)
-                //    });
-                //}
             }
         }
 
