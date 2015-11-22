@@ -3,9 +3,9 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
 using System.Web.Http.ExceptionHandling;
+using Newtonsoft.Json.Serialization;
 using OAuthServer.Filters.Attributes;
 using OAuthServer.Tracing;
-using Newtonsoft.Json.Serialization;
 using Owin;
 
 namespace OAuthServer

@@ -45,33 +45,7 @@ namespace AuthServer.Migrations
                     Secret = _hashProvider.GetSHA256Hash("ngoauthmanagementapp-clientid").ToBase64String()
                 };
 
-            //var esaSignatureClient =
-            //    new Client
-            //    {
-            //        Active = true,
-            //        AllowedOrigin = "*",
-            //        ApplicationType = ApplicationTypes.Javascript,
-            //        Description = "ESA Signature",
-            //        ClientId = "ngESASignature",
-            //        AccessTokenExpireTime = 10,
-            //        RefreshTokenLifeTime = 10080, // 1 week in minutes
-            //        Secret = _hashProvider.GetSHA256Hash("espa@clublacosta.com").ToBase64String()
-            //    };
-
-            //var esaTmAzureClient =
-            //    new Client
-            //    {
-            //        Active = true,
-            //        AllowedOrigin = "*",
-            //        ApplicationType = ApplicationTypes.Javascript,
-            //        Description = "ESA TM Azure",
-            //        ClientId = "ngESATMAzure",
-            //        AccessTokenExpireTime = 10,
-            //        RefreshTokenLifeTime = 10080, // 1 week in minutes
-            //        Secret = _hashProvider.GetSHA256Hash("espa@clublacosta.com").ToBase64String()
-            //    };
-
-            context.Clients.AddOrUpdate(angularAdminClient); //, esaSignatureClient, esaTmAzureClient);
+            context.Clients.AddOrUpdate(angularAdminClient);
 
             // Initialize roles
             var adminRole = new IdentityRole("Admin");
