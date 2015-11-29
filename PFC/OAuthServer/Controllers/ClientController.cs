@@ -174,7 +174,7 @@ namespace OAuthServer.Controllers
         #region GetRefreshTokensByClientAsync
 
         /// <summary>
-        /// Gets a client by its id.
+        /// Gets all refresh tokens of a client by its id.
         /// </summary>
         /// <param name="clientId"></param>
         /// <returns></returns>
