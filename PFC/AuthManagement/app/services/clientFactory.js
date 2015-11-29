@@ -26,6 +26,7 @@
 
             function getClientsForSetupFailed(error) {
                 //Log error
+                return $q.reject(error);
             }
         }
 
@@ -40,6 +41,7 @@
 
             function deleteClientFailed(error) {
                 //Log error
+                return $q.reject(error);
             }
         }
     }
