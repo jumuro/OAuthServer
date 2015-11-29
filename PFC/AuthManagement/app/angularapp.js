@@ -1002,6 +1002,7 @@ function match() {
 
             function getClientsForSetupFailed(error) {
                 //Log error
+                return $q.reject(error);
             }
         }
 
@@ -1016,6 +1017,7 @@ function match() {
 
             function deleteClientFailed(error) {
                 //Log error
+                return $q.reject(error);
             }
         }
     }
