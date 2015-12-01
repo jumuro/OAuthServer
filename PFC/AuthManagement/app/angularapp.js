@@ -5,7 +5,7 @@
     // Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
     //'mgcrea.ngStrap'
     angular.module('app', ['ngRoute', 'ngLocale',
-                           'jumuro.crudRest', 'jumuro.oAuth', 'jumuro.spinner', 'jumuro.modal', 'jumuro.grid', 'jumuro.validations', 'jumuro.webapi']); //'espa.errorHandling',
+                           'jumuro.crudRest', 'jumuro.oAuth', 'jumuro.spinner', 'jumuro.modal', 'jumuro.grid', 'jumuro.validations', 'jumuro.webapi']);
 })();
 ///#source 1 1 /app/app.config.js
 (function () {
@@ -108,36 +108,13 @@
         var vm = this;
 
         vm.applicationTypes = [];
-        vm.deleteClient = deleteClient;
         vm.gridClientsOptions = {};
         vm.openPopup = openPopup;
+        vm.deleteClient = deleteClient;
         
-
-
-
-
-
-
-        // IS THIS NECESSARY?? I THINK NOT
-        //var configureClientsGrid = configureClientsGrid;
-        //var getClientsForSetup = getClientsForSetup;
-
-
-
-
-
-
-
-
-        initialize(); // activate();
+        initialize();
 
         //#region Scope Methods
-
-        //Initializes page
-        function initialize() {
-            configureClientsGrid();
-            getClientsForSetup();
-        }
 
         //Open Add/Edit popup
         function openPopup(isEdit, client) {
@@ -146,7 +123,7 @@
             var modalInstance = $modal.open({
                 windowClass: 'modalWindow',
                 templateUrl: './app/views/ClientPopup.html',
-                controller: 'ClientPopupController',
+                controller: 'ClientPopupController as vm',
                 resolve: {
                     items: function () {
                         return {
@@ -202,7 +179,7 @@
 
             var modal = modalService.modal(modalOptions);
             modal.then(function (result) {
-                clientFactory.deleteClient(client.cliendId)
+                clientFactory.deleteClient(client.clientId)
                     .then(function (data) {
                         //vm.gridClientsOptions.dataList.splice(index, 1);
 
@@ -219,6 +196,12 @@
         //#endregion Scope Methods
 
         //#region Private Methods
+
+        //Initializes page
+        function initialize() {
+            configureClientsGrid();
+            getClientsForSetup();
+        }
 
         //Set the clients grid configuration
         function configureClientsGrid()
@@ -284,81 +267,97 @@
     }
 })();
 ///#source 1 1 /app/controllers/ClientPopupController.js
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('app')
-    .controller('ClientPopupController', ClientPopupController);
+    angular.module('app')
+        .controller('ClientPopupController', ClientPopupController);
 
-ClientPopupController.$inject = ['$scope', '$modalInstance', 'webapiConstants', 'jumuroCrudRESTService', 'items', 'webapiAppConfigConstants'];
+    ClientPopupController.$inject = ['$modalInstance', 'webapiConstants', 'items', 'webapiAppConfigConstants', 'clientFactory'];
 
-function ClientPopupController($scope, $modalInstance, webapiConstants, jumuroCrudRESTService, items, webapiAppConfigConstants) {
-    //#region Scope Methods
+    function ClientPopupController($modalInstance, webapiConstants, items, webapiAppConfigConstants, clientFactory) {
+        var vm = this;
 
-    //Initialize page
-    $scope.initialize = function () {
-        $scope.form = {};
-        $scope.resultPopUp = {
+        vm.form = {};
+        vm.resultPopUp = {
             isRefresh: false,
             client: []
         };
-        $scope.client = items.client;
-        $scope.applicationTypes = items.applicationTypes;
-        $scope.isEdit = items.isEdit;
+        vm.client = items.client;
+        vm.applicationTypes = items.applicationTypes;
+        vm.isEdit = items.isEdit;
+        vm.popupHeaderText = '';
+        vm.popupOkText = '';
+        vm.ok = ok;
+        vm.cancel = cancel;
 
-        if (items.isEdit) {
-            // Select current application type of the client
-            for (var i = 0; i < $scope.applicationTypes.length; i++) {
-                if ($scope.client.applicationType.id == $scope.applicationTypes[i].id) {
-                    $scope.client.applicationType = $scope.applicationTypes[i];
-                    break;
-                }
+        initialize();
+
+        //#region Scope Methods
+
+        function ok() {
+            //Mark as refresh
+            vm.resultPopUp.isRefresh = true;
+
+            if (items.isEdit) {
+                clientFactory.updateClient(vm.client)
+                    .then(function (data) {
+                        //Mark as edition
+                        vm.resultPopUp.isEdition = true;
+
+                        //Set modified client
+                        vm.resultPopUp.client = data;
+
+                        //Close popup
+                        $modalInstance.close(vm.resultPopUp);
+                });
             }
+            else {
+                clientFactory.createClient(vm.client)
+                    .then(function (data) {
+                    //Mark as edition
+                    vm.resultPopUp.isEdition = false;
 
-            $scope.popupHeaderText = 'Edit';
-            $scope.popupOkText = 'Update';
+                    //Set added client
+                    vm.resultPopUp.client = data;
+
+                    //Close popup
+                    $modalInstance.close(vm.resultPopUp);
+                });
+            }
         }
-        else {
-            $scope.popupHeaderText = 'Add';
-            $scope.popupOkText = 'Add';
+
+        function cancel() {
+            $modalInstance.dismiss('cancel');
         }
-    };
 
-    $scope.ok = function () {
-        //Mark as refresh
-        $scope.resultPopUp.isRefresh = true;
+        //#endregion Scope Methods
 
-        if (items.isEdit) {
-            jumuroCrudRESTService.restPut($scope.client, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putClient, false).then(function (data) {
-                //Mark as edition
-                $scope.resultPopUp.isEdition = true;
+        //#region Private Methods
 
-                //Set modified client
-                $scope.resultPopUp.client = data;
+        //Initialize page
+        function initialize() {
+            if (items.isEdit) {
+                // Select current application type of the client
+                for (var i = 0; i < vm.applicationTypes.length; i++) {
+                    if (vm.client.applicationType.id == vm.applicationTypes[i].id) {
+                        vm.client.applicationType = vm.applicationTypes[i];
+                        break;
+                    }
+                }
 
-                //Close popup
-                $modalInstance.close($scope.resultPopUp);
-            });
-        }
-        else {
-            jumuroCrudRESTService.restPost($scope.client, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postClient, false).then(function (data) {
-                //Mark as edition
-                $scope.resultPopUp.isEdition = false;
+                vm.popupHeaderText = 'Edit';
+                vm.popupOkText = 'Update';
+            }
+            else {
+                vm.popupHeaderText = 'Add';
+                vm.popupOkText = 'Add';
+            }
+        };
 
-                //Set added client
-                $scope.resultPopUp.client = data;
-
-                //Close popup
-                $modalInstance.close($scope.resultPopUp);
-            });
-        }
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-
-    //#endregion Scope Methods
-}
+        //#endregion Private Methods
+    }
+})();
 ///#source 1 1 /app/controllers/LoginController.js
 'use strict';
 
@@ -986,6 +985,8 @@ function match() {
     function clientFactory(webapiConstants, jumuroCrudRESTService, webapiAppConfigConstants) {
         var service = {
             getClientsForSetup: getClientsForSetup,
+            createClient: createClient,
+            updateClient: updateClient,
             deleteClient: deleteClient
         };
 
@@ -1001,6 +1002,36 @@ function match() {
             }
 
             function getClientsForSetupFailed(error) {
+                //Log error
+                return $q.reject(error);
+            }
+        }
+
+        function createClient(client) {
+            return jumuroCrudRESTService.restPost(client, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.postClient, false)
+                .then(createClientComplete)
+                .catch(createClientFailed);
+
+            function createClientComplete(data) {
+                return data;
+            }
+
+            function createClientFailed(error) {
+                //Log error
+                return $q.reject(error);
+            }
+        }
+
+        function updateClient(client) {
+            return jumuroCrudRESTService.restPut(client, webapiAppConfigConstants.appConfig.ApiURL + webapiConstants.urls.ApiUrl.putClient, false)
+                .then(updateClientComplete)
+                .catch(updateClientFailed);
+
+            function updateClientComplete(data) {
+                return data;
+            }
+
+            function updateClientFailed(error) {
                 //Log error
                 return $q.reject(error);
             }
