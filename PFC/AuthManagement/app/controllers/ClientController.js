@@ -10,36 +10,13 @@
         var vm = this;
 
         vm.applicationTypes = [];
-        vm.deleteClient = deleteClient;
         vm.gridClientsOptions = {};
         vm.openPopup = openPopup;
+        vm.deleteClient = deleteClient;
         
-
-
-
-
-
-
-        // IS THIS NECESSARY?? I THINK NOT
-        //var configureClientsGrid = configureClientsGrid;
-        //var getClientsForSetup = getClientsForSetup;
-
-
-
-
-
-
-
-
-        initialize(); // activate();
+        initialize();
 
         //#region Scope Methods
-
-        //Initializes page
-        function initialize() {
-            configureClientsGrid();
-            getClientsForSetup();
-        }
 
         //Open Add/Edit popup
         function openPopup(isEdit, client) {
@@ -48,7 +25,7 @@
             var modalInstance = $modal.open({
                 windowClass: 'modalWindow',
                 templateUrl: './app/views/ClientPopup.html',
-                controller: 'ClientPopupController',
+                controller: 'ClientPopupController as vm',
                 resolve: {
                     items: function () {
                         return {
@@ -104,7 +81,7 @@
 
             var modal = modalService.modal(modalOptions);
             modal.then(function (result) {
-                clientFactory.deleteClient(client.cliendId)
+                clientFactory.deleteClient(client.clientId)
                     .then(function (data) {
                         //vm.gridClientsOptions.dataList.splice(index, 1);
 
@@ -121,6 +98,12 @@
         //#endregion Scope Methods
 
         //#region Private Methods
+
+        //Initializes page
+        function initialize() {
+            configureClientsGrid();
+            getClientsForSetup();
+        }
 
         //Set the clients grid configuration
         function configureClientsGrid()
