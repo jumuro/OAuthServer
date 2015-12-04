@@ -67,14 +67,8 @@ namespace OAuthServer.Services
         public async Task<ClientViewModel> GetClientAsync(string clientId)
         {
             var client = await _dbContext.Clients.FindAsync(clientId);
-            if (client != null)
-            {
-                return new ClientViewModel(client);
-            }
-            else
-            {
-                return null;
-            }
+
+            return ((client != null) ? new ClientViewModel(client) : null);
         }
 
         #endregion
