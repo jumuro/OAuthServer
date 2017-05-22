@@ -1,6 +1,0 @@
-﻿{
-    "appConfig": {
-        "OAuthURL": "http://oauthtest.jumuro.com/token",
-        "ApiURL": "http://oauthtest.jumuro.com/api/"
-    }
-}

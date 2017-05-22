@@ -1,0 +1,130 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">{{popupHeaderText}} User</h3>
+    </div>
+    <div class="modal-body" ng-init="initialize()">
+        <form class="form-horizontal" name="form.User">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Name</label>
+                    <div class="col-md-9"
+                         ng-class="{ 'has-error' : form.User.ctrlUserName.$invalid && !form.User.ctrlUserName.$pristine }">
+                        <input type="text" class="form-control"
+                               ng-maxlength="256"
+                               name="ctrlUserName"
+                               placeholder="Please enter user name..." ng-model="user.userName"
+                               required />
+                        <div class="error-group">
+                            <div ng-show="form.User.ctrlUserName.$invalid && !form.User.ctrlUserName.$pristine">
+                                <p class="help-block" ng-show="form.User.ctrlUserName.$error.required">User name is required.</p>
+                                <p class="help-block" ng-show="form.User.ctrlUserName.$error.maxlength">User name is too long.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-hide="isEdit">
+                    <label class="col-md-3 control-label">Password</label>
+                    <div class="col-md-9"
+                         ng-class="{ 'has-error' : (form.User.ctrlPassword.$invalid && !form.User.ctrlPassword.$pristine) || form.User.ctrlConfirmPassword.$error.match }">
+                        <input type="password" class="form-control"
+                               ng-minlength="6"
+                               ng-maxlength="100"
+                               name="ctrlPassword"
+                               placeholder="Please enter a password..." ng-model="user.password"
+                               ng-required="!isEdit" />
+                        <div class="error-group">
+                            <div ng-show="form.User.ctrlPassword.$invalid && !form.User.ctrlPassword.$pristine">
+                                <p class="help-block" ng-show="form.User.ctrlPassword.$error.required">User password is required.</p>
+                                <p class="help-block" ng-show="form.User.ctrlPassword.$error.minlength">User password is too short.</p>
+                                <p class="help-block" ng-show="form.User.ctrlPassword.$error.maxlength">User password is too long.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-hide="isEdit">
+                    <label class="col-md-3 control-label">Confirm password</label>
+                    <div class="col-md-9"
+                         ng-class="{ 'has-error' : form.User.ctrlConfirmPassword.$invalid && !form.User.ctrlConfirmPassword.$pristine }">
+                        <input type="password" class="form-control"
+                               ng-minlength="6"
+                               ng-maxlength="100"
+                               name="ctrlConfirmPassword"
+                               placeholder="Please confirm password..." ng-model="user.confirmPassword"
+                               ng-required="!isEdit" match="user.password" />
+                        <div class="error-group">
+                            <div ng-show="form.User.ctrlConfirmPassword.$invalid && !form.User.ctrlConfirmPassword.$pristine">
+                                <p class="help-block" ng-show="form.User.ctrlConfirmPassword.$error.required">Confirm password is required.</p>
+                                <p class="help-block" ng-show="form.User.ctrlConfirmPassword.$error.minlength">Confirm password is too short.</p>
+                                <p class="help-block" ng-show="form.User.ctrlConfirmPassword.$error.maxlength">Confirm password is too long.</p>
+                                <p class="help-block" ng-show="form.User.ctrlConfirmPassword.$error.match">Passwords do not match.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Email</label>
+                    <div class="col-md-9"
+                         ng-class="{ 'has-error' : form.User.ctrlEmail.$invalid && !form.User.ctrlEmail.$pristine }">
+                        <input type="email" class="form-control"
+                               ng-maxlength="256"
+                               name="ctrlEmail"
+                               placeholder="Please enter email..." ng-model="user.email" />
+                        <div class="error-group">
+                            <div ng-show="form.User.ctrlEmail.$invalid && !form.User.ctrlEmail.$pristine">
+                                <p class="help-block" ng-show="form.User.ctrlEmail.$error.maxlength">User email is too long.</p>
+                                <p class="help-block" ng-show="form.User.ctrlEmail.$error.email">User email is not valid.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Client</label>
+                    <div class="col-md-9"
+                         ng-class="{ 'has-error' : form.User.ctrlClient.$invalid && !form.User.ctrlClient.$pristine }">
+                        <select class="form-control"
+                                name="ctrlClient"
+                                ng-model="user.client"
+                                ng-options="client as client.clientId for client in clients"
+                                required>
+                            <option value="">-- Select Client --</option>
+                        </select>
+                        <div class="error-group">
+                            <div ng-show="form.User.ctrlClient.$invalid && !form.User.ctrlClient.$pristine">
+                                <p class="help-block" ng-show="form.User.ctrlClient.$error.required">Client is required.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Role</label>
+                    <div class="col-md-9"
+                         ng-class="{ 'has-error' : form.User.ctrlRole.$invalid && !form.User.ctrlRole.$pristine }">
+                        <select class="form-control"
+                                name="ctrlRole"
+                                ng-model="user.role"
+                                ng-options="role as role.name for role in roles"
+                                required>
+                            <option value="">-- Select Role --</option>
+                        </select>
+                        <div class="error-group">
+                            <div ng-show="form.User.ctrlRole.$invalid && !form.User.ctrlRole.$pristine">
+                                <p class="help-block" ng-show="form.User.ctrlRole.$error.required">Role is required.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Is Active</label>
+                    <div class="col-md-9 form-control-static">
+                        <input type="checkbox" name="ctrlIsActive" ng-model="user.isActive" />
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" data-ng-disabled="form.User.$invalid" id="btnOkAddUserPopUp">{{popupOkText}}</button>
+        <button class="btn btn-warning" ng-click="cancel()" id="btnCloseAddUserPopUp">Close</button>
+    </div>
+</div>
+<!--</script>-->

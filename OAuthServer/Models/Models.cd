@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OAuthServer.Models.OAuthServerDbContext">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIIAAAAAACAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\WebApiUsersDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OAuthServer.Models.ApplicationRoleManager">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ApplicationRoleManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OAuthServer.Models.ApplicationUserManager">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ApplicationUserManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OAuthServer.Models.Audit">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAACAAAAAAAAgIAAAAgAAAAAAAAACAAAEAAAAAQ=</HashCode>
+      <FileName>Models\Audit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OAuthServer.Models.Client">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAACAAAAAgAAAAgAACAAQAAAAAAAAgAAAIIAAAAAA=</HashCode>
+      <FileName>Models\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OAuthServer.Models.RefreshToken">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABACAAAgAAAAAAgAAAAAgAAIAAAAAAAQAAAAAAAAQ=</HashCode>
+      <FileName>Models\RefreshToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OAuthServer.Models.User">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OAuthServer.Models.UserClient">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="OAuthServer.Models.ApplicationTypes">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ApplicationTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

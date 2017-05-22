@@ -1,0 +1,65 @@
+﻿<div class="popover">
+    <div class="arrow"></div>
+    <h3 class="popover-title" ng-show="title"><i class="fa fa-table padding_right"></i>{{title}}</h3>
+    <div class="popover-content">
+        <form name="popoverForm">
+            <p ng-bind-html="content"></p>
+            <div class="form-actions text-center">
+                <table>
+                    <tr>
+                        <td align="center">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td style="padding:0;">
+                                        <label style="width: 100%; height:100%; cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; "
+                                               ng-click="checkAll()">
+                                            <input type="checkbox" ng-model="filters.isAll" style="margin-right:7px" />
+                                            All
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="filter in gridOptions.columnList[selectedFilterColumnIndex].filterList">
+                                    <td style="padding:0;">
+                                        <label style="width: 100%; height: 100%; cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; "
+                                               ng-click="checkItemFilter()">
+                                            <input type="checkbox" ng-model="filter.isIncluded" style="margin-right:7px" />
+                                            <span ng-bind="filter.filterValue" style="vertical-align:top"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-xs btn-primary " ng-click="applyFilter();$hide()" ng-disabled="!canFilter()">
+                                            <i class=" fa fa-check padding_right"></i>
+                                            Apply
+                                        </button>
+                                    </td>
+                                    <td style="padding-left:2px">
+                                        <button class="btn btn-xs btn-warning" ng-click="removeFilter();$hide()" ng-disabled="!selectedColumnIsFiltered()">
+                                            <i class="fa fa-remove padding_right"></i>
+                                            Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button class="btn btn-xs btn-danger " ng-click="$hide()">
+                                            <i class="fa fa-close padding_right"></i>
+                                            Close
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

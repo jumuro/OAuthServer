@@ -1,0 +1,12 @@
+﻿<div class="app_containter">
+    <div class="row box-sizing">
+        <div class="container">
+            <a class="btn btn-primary btn-xs col-md-3 col-md-push-9"
+               jumuro-display jumuro-displayroute="/refreshToken" jumuro-displayaction="refresh"
+               ng-click="getRefreshTokens()" id="btnRefreshGrid"><i class="fa fa-refresh padding_right"></i>Refresh (showing {{gridRefreshTokensOptions.dataList.length}})</a>
+        </div>
+    </div>
+    <div ng-init="initialize()" class="container">
+        <jumuro-grid jumuro-gridoptions="gridRefreshTokensOptions"></jumuro-grid>
+    </div>
+</div>
