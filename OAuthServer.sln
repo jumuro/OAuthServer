@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E62527
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthManagementApp", "OAuthManagement\OAuthManagementApp.csproj", "{75CAF012-91AD-4D81-BAA8-0259E0F9DE8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthManagementApp", "OAuthManagementApp\OAuthManagementApp.csproj", "{75CAF012-91AD-4D81-BAA8-0259E0F9DE8A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{040C3CDD-2016-4397-B2EE-944855B1B4AF}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,9 +35,9 @@ Global
 		SccProjectUniqueName1 = OAuthServer\\OAuthServer.csproj
 		SccProjectName1 = OAuthServer
 		SccLocalPath1 = OAuthServer
-		SccProjectUniqueName2 = OAuthManagement\\OAuthManagementApp.csproj
-		SccProjectName2 = OAuthManagement
-		SccLocalPath2 = OAuthManagement
+		SccProjectUniqueName2 = OAuthManagementApp\\OAuthManagementApp.csproj
+		SccProjectName2 = OAuthManagementApp
+		SccLocalPath2 = OAuthManagementApp
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
